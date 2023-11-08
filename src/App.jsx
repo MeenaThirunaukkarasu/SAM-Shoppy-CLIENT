@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      Hi This is Meena's Shopping Site.
+      Hi This is Meena's Shopping Site...
     </>
   )
 }
