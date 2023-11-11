@@ -11,9 +11,14 @@ function NavBar() {
     <div>
       <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          {/* <a className="navbar-brand" href="#">
             Navbar
-          </a>
+          </a> */}
+          <img
+            src="public/logo.png"
+            className="logo"
+            alt="Description of the image"
+          ></img>
           <button
             className="navbar-toggler"
             type="button"
@@ -28,40 +33,39 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                
+                <Link to="/" className="nav-link active" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Features
-                </a>
+              <Link to="/feature" className="nav-link " aria-current="page">
+              Features
+                </Link>
+               
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Pricing
-                </a>
+              <Link to="/pricing" className="nav-link " aria-current="page">
+              Pricing
+                </Link>
+               
               </li>
               <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
+              <Link to="/pricing"  className="nav-link dropdown-toggle"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categories
-                </a>
+                  aria-expanded="false">
+              Categories
+                </Link>
+               
+             
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Men
-                    </a>
+                     <Link to='/men' className="dropdown-item">Men</Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Women
-                    </a>
+                    <Link to='/women' className="dropdown-item" >Women</Link>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
@@ -70,35 +74,47 @@ function NavBar() {
                   </li>
                 </ul>
               </li>
-              
-              <li className="nav-item">
-                <Link to="/" className="nav-link">
-                  Home
-                </Link>
-              </li>
-              {!isLoggedIn ? (
-            <>
-              <li className="nav-item">
-                <Link to="/signup" className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
 
               <li className="nav-item">
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
+                
               </li>
-              </>):(
+              {!isLoggedIn ? (
+                <>
+                  <li className="nav-item">
+                    <Link to="/signup" className="nav-link">
+                      Sign Up
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link to="/login" className="nav-link">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
                 // If user is logged in, show user's name and logout button
-            <>
-              <li>
-                <span>{user && user.name}</span>
-              </li>
-              <li>
-                <button onClick={logOutUser}>Logout</button>
-              </li>
-              </>
+                <>
+                  <li>
+                  <a href="">
+                 
+                    <img
+                      src="/login.png"
+                      className="human-icon"
+                      alt="human icon"
+                    ></img>
+                     </a>
+                    <span className="user">{user && user.name}</span>
+                  </li>
+                <li> <i className="bi bi-bag"></i></li>
+                
+                 
+               
+
+                  <li>
+                    <button onClick={logOutUser}>Logout</button>
+                  </li>
+                </>
               )}
             </ul>
           </div>

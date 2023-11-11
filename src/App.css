@@ -12,6 +12,7 @@ width: 100%;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  /* background: none; */
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -53,4 +54,32 @@ width: 100%;
 
 .read-the-docs {
   color: #888;
+}
+.human-icon {
+  height: 5.5em;
+  padding: 2em;
+  margin-left: 600px;
+  will-change: filter;
+  transition: filter 300ms;
+  background: none;
+}
+.cart {
+  height: 5em;
+  padding: 1.5em;
+  margin-left: 100px;
+  will-change: filter;
+  transition: filter 300ms;
+  /* background: none; */
+} 
+.user{
+  margin-left: 600px;
+}
+.product-img{
+  height: 80%;
+  width:80%;
+  margin: auto;
+}
+.card-content{
+  width: 20%;
+  margin: 10px auto 10px auto;
 }
