@@ -50,6 +50,7 @@ width: 100%;
 }
 .card {
   padding: 2em;
+  margin-top: 45%;
 }
 
 .read-the-docs {
@@ -75,8 +76,8 @@ width: 100%;
   margin-left: 600px;
 }
 .product-img{
-  height: 100%;
-  width:100%;
+  height: 80%;
+  width:80%;
   margin: auto;
 }
 .card-content{
