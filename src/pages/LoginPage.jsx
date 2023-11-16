@@ -44,7 +44,7 @@ function LoginPage() {
         <br />
 
         <label>Password</label>
-        <input type="text" name="password"></input>
+        <input type="password" name="password"></input>
         <button type="submit">Log In</button>
 
         </form>

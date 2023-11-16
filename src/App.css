@@ -75,11 +75,46 @@ width: 100%;
   margin-left: 600px;
 }
 .product-img{
-  height: 80%;
-  width:80%;
+  height: 100%;
+  width:100%;
   margin: auto;
 }
 .card-content{
   width: 20%;
   margin: 10px auto 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+.card {
+  margin-bottom: 15px; 
+}
+.container {
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.product-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000%; 
+  margin: 0 auto; 
+}
+
+.product-image {
+  max-width: 800px;
+  max-height: 900px;
+  margin-top: auto;
+  padding-bottom: 2.5rem;
+    padding-top: 2.5rem;
+}
+
+.product-details {
+  max-width: 1000px;
+  max-height: 700px;
+  margin-top: auto;
+  margin-right: 600px;
+  padding-bottom: 2.5rem;
+    padding-top: 2.5rem;
 }

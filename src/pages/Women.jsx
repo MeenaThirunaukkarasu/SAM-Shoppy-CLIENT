@@ -1,34 +1,30 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Women() {
-  const [AllProduct, setAllProduct] = useState([]);
-  const [wowomenProduct, setWowomenProduct] = useState([]);
-
+  const [womenProduct, setWomenProduct] = useState([]);
+    const navigate=useNavigate()
   useEffect(() => {
-    console.log("women product page");
+    //console.log("women product page");
     axios
-      .get("https://portfolio-eshop-api.onrender.com/api/products")
+      .get("http://localhost:5005/products/women")
       .then((response) => {
-        setAllProduct(response.data);
+        setWomenProduct(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  useEffect(() => {
-  const filteredProduct=AllProduct.filter(product=>{
-    console.log(product.categories)
-   return product.categories[0]==="women"
-  })
-  setWowomenProduct(filteredProduct)
-}, [AllProduct]);
+  function singleProduct(id){
+    navigate(`/product/${id}`)
+  }
 
   return (
     <div>
-      {wowomenProduct.map((womenProduct) => {
+      {womenProduct.map((womenProduct) => {
         return (
-          <div className="card-content" key={womenProduct._id}>
+          <div className="card-content" key={womenProduct._id} onClick={()=>{singleProduct(womenProduct._id)}}>
             <div className="card" style={{ width: "18rem" }}>
               <img
                 className="card-img-top product-img"
@@ -37,16 +33,7 @@ function Women() {
               />
               <div className="card-body">
                 <h5 className="card-title">{womenProduct.title}</h5>
-                <p className="card-text">{womenProduct.desc}</p>
-                <p>Category: {womenProduct.categories[0]}, {womenProduct.categories[1]}, {womenProduct.categories[2]}</p> 
-                 
-            
-                <p className="card-text">
-                  Available Size: {womenProduct.size[0]},{womenProduct.size[1]},{womenProduct.size[2]}
-                </p>
-                <p className="card-text">
-                  Color: {womenProduct.color}
-                </p>
+               
                 <p className="card-text">
                   Price: ${womenProduct.price}</p>
               </div>

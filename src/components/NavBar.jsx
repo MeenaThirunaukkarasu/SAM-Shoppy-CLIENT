@@ -15,7 +15,7 @@ function NavBar() {
             Navbar
           </a> */}
           <img
-            src="public/logo.png"
+            src="/logo.png"
             className="logo"
             alt="Description of the image"
           ></img>
@@ -67,10 +67,14 @@ function NavBar() {
                   <li>
                     <Link to='/women' className="dropdown-item" >Women</Link>
                   </li>
+                  {/* <li>
+                    <Link to='/kids' className="dropdown-item" >kids</Link>
+                  </li>  */}
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Kids
-                    </a>
+                    <Link to='/boys' className="dropdown-item" >Boys</Link>
+                  </li>
+                  <li>
+                    <Link to='/girls' className="dropdown-item" >Girls</Link>
                   </li>
                 </ul>
               </li>
