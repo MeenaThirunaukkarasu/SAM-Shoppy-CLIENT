@@ -17,7 +17,7 @@ function AuthProviderWrapper(props) {
   const removeToken = () => {                    // <== ADD
       // Upon logout, remove the token from the localStorage
       localStorage.removeItem("authToken");
-    }
+    } 
     const logOutUser = () => {                   // <== ADD    
       // To log out the user, remove the token
       removeToken();
@@ -57,8 +57,6 @@ function AuthProviderWrapper(props) {
         setUser(null);      
     }   
   }
-  
-     
   
   useEffect(() => {                 //  <==  ADD                                   
     authenticateUser();  

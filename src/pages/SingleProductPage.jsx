@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { CartContext } from "./../context/cart.context";
 
 function SingleProductPage() {
   const [singleProduct, setSingleProduct] = useState([]);
   const productId = useParams();
+  // const { addProduct } = useContext(CartContext);
+  const handleAddToCart = () => {
+    // Call the addProduct function with the current product
+    // addProduct(product);
+  };
 //   const availableSizes = singleProduct.size || [];
   useEffect(() => {
     axios
@@ -43,9 +49,13 @@ function SingleProductPage() {
           </select>
 
             <p className="card-text">Price: ${singleProduct.price}</p>
+            <button onClick={handleAddToCart}>Add to Cart</button>
+
           </div>
         </div>
       </div>
+      {/* Add to Cart button */}
+     
     </div>
   );
 

@@ -2,11 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+// import { CartContext } from "../context/cart.context";
 
 function NavBar() {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider `value` prop
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  // const { cart } = useContext(CartContext);
   return (
     <div>
       <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
@@ -112,11 +114,11 @@ function NavBar() {
                   </li>
                 <li> <i className="bi bi-bag"></i></li>
                 
-                 
-               
-
                   <li>
                     <button onClick={logOutUser}>Logout</button>
+                  </li>
+                  <li>
+                    <button>👜</button>
                   </li>
                 </>
               )}
@@ -124,6 +126,9 @@ function NavBar() {
           </div>
         </div>
       </nav>
+      {/* <button>
+        Cart ({cart.length})
+      </button> */}
     </div>
   );
 }

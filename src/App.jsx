@@ -10,10 +10,10 @@ import IsPrivate from './components/IsPrivate'
 import IsAnon from './components/IsAnon'
 import Men from './pages/Men'
 import Women from './pages/Women'
-//import Kids from './pages/Boys'
 import Boys from './pages/Boys'
 import Girls from './pages/Girls'
 import SingleProductPage from './pages/SingleProductPage'
+// import CartPage from './pages/CartPage'
 
 function App() {
 
@@ -33,7 +33,7 @@ function App() {
       <Route path="/product/:id" element={ <SingleProductPage /> } />
     </Routes>
     
-   
+   {/* <CartPage /> */}
     
     </div>
   )
