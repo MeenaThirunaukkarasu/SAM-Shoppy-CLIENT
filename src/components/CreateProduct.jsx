@@ -1,30 +1,49 @@
+import axios from "axios";
 import React, { useState } from "react";
 
-function EditProduct({ product, onCreate, onCancel }) {
-  const [editedProduct, setEditedProduct] = useState({ ...product });
+function CreateProduct() {
+    const [product, setProduct] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditedProduct({ ...editedProduct, [name]: value });
+    setProduct({ ...product, [name]: value });
   };
 
-  const handleCreate = () => {
-    onCreate(editedProduct);
-  };
 
   const handleCancel = () => {
-    onCancel();
+    //  onCancel();
+  };
+  const handleSave = (e) => {
+    e.preventDefault();
+    const productData = {
+      title: e.target.title.value,
+      desc: e.target.desc.value,
+      img: e.target.img.value,
+      availability: e.target.availability.value,
+      inStock: e.target.inStock.value,
+      categories: e.target.categories.value,
+      size: e.target.size.value,
+      price: e.target.price.value,
+    };
+console.log(productData)
+
+    axios.post(`http://localhost:5005/product`, productData)
+      .then(response => {
+        console.log(response.data)
+      })
+
+    setView(null);
   };
 
   return (
-    <form>
+    <form onSubmit={handleSave}>
       <div>
         <label htmlFor="img">Image URL:</label>
         <input
           type="text"
           id="img"
           name="img"
-          value={editedProduct.img}
+          // value={editedProduct.img}
           onChange={handleInputChange}
         />
       </div>
@@ -34,7 +53,7 @@ function EditProduct({ product, onCreate, onCancel }) {
           type="text"
           id="title"
           name="title"
-          value={editedProduct.title}
+          // value={editedProduct.title}
           onChange={handleInputChange}
         />
       </div>
@@ -43,7 +62,7 @@ function EditProduct({ product, onCreate, onCancel }) {
         <textarea
           id="desc"
           name="desc"
-          value={editedProduct.desc}
+          // value={editedProduct.desc}
           onChange={handleInputChange}
         />
       </div>
@@ -53,7 +72,7 @@ function EditProduct({ product, onCreate, onCancel }) {
           type="text"
           id="categories"
           name="categories"
-          value={editedProduct.categories}
+          // value={editedProduct.categories}
           onChange={handleInputChange}
         />
       </div>
@@ -63,7 +82,7 @@ function EditProduct({ product, onCreate, onCancel }) {
           type="text"
           id="availability"
           name="availability"
-          value={editedProduct.availability}
+          // value={editedProduct.availability}
           onChange={handleInputChange}
         />
       </div>
@@ -73,15 +92,13 @@ function EditProduct({ product, onCreate, onCancel }) {
           type="text"
           id="price"
           name="price"
-          value={editedProduct.price}
+          // value={editedProduct.price}
           onChange={handleInputChange}
         />
       </div>
 
       {/* Add other editable fields as needed */}
-      <button type="button" onClick={handleSave}>
-        Create
-      </button>
+      <button type="submit">Create</button>
       <button type="button" onClick={handleCancel}>
         Cancel
       </button>
@@ -89,4 +106,4 @@ function EditProduct({ product, onCreate, onCancel }) {
   );
 }
 
-export default EditProduct;
+export default CreateProduct;

@@ -68,19 +68,19 @@ function NavBar() {
              
                 <ul className="dropdown-menu">
                   <li>
-                     <Link to='/men' className="dropdown-item">Men</Link>
+                     <Link to='/products' state={{category:'men'}} className="dropdown-item">Men</Link>
                   </li>
                   <li>
-                    <Link to='/women' className="dropdown-item" >Women</Link>
+                    <Link to='/products' state={{category:'women'}} className="dropdown-item" >Women</Link>
                   </li>
                   {/* <li>
                     <Link to='/kids' className="dropdown-item" >kids</Link>
                   </li>  */}
                   <li>
-                    <Link to='/boys' className="dropdown-item" >Boys</Link>
+                    <Link to='/products' state={{category:'boys'}} className="dropdown-item" >Boys</Link>
                   </li>
                   <li>
-                    <Link to='/girls' className="dropdown-item" >Girls</Link>
+                    <Link to='/products' state={{category:'girls'}} className="dropdown-item" >Girls</Link>
                   </li>
                 </ul>
               </li>

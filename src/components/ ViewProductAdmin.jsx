@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function ViewProductAdmin({ men }) {
+function ViewProductAdmin({setShowList, category, setView}) {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch products based on the provided category (e.g., men, women, boys, girls)
     axios
-      .get("http://localhost:5005/products/men")
+      .get(`http://localhost:5005/products/${category}`)
       .then((response) => {
         setProducts(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [men]);
+  }, [category]);
 
   function handleUpdate(id) {
     // Handle the update logic, navigate to the update page or display a modal, etc.
@@ -34,7 +32,7 @@ function ViewProductAdmin({ men }) {
     <div>
       <div className="container">
         <div className="back-button">
-          <button onClick={() => navigate(-1)}>Back</button>
+          <button onClick={() => {setView(null); setShowList(null)}}>Back</button>
         </div>
 
         <div className="card-content">

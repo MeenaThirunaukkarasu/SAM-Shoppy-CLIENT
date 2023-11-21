@@ -1,22 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 function Men() {
+  const location=useLocation()
   const [menProduct, setMenProduct] = useState([]);
   const navigate = useNavigate();
   
   useEffect(() => {
-    // console.log("men product page");
+    const category=location.state?.category
     axios
-      .get("http://localhost:5005/products/men")
+      .get(`http://localhost:5005/products/${category}`)
       .then((response) => {
         setMenProduct(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [location.state?.category]);
   function singleProduct(id) {
     navigate(`/product/${id}`);
   }
