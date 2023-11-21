@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState,useContext } from "react";
+import { useParams, useNavigate  } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "./../context/cart.context";
+
 
 function SingleProductPage() {
   const [singleProduct, setSingleProduct] = useState([]);
   const productId = useParams();
+  const navigate = useNavigate();
+  const { addProduct } =  useContext(CartContext)
+
   // const { addProduct } = useContext(CartContext);
   const handleAddToCart = () => {
     // Call the addProduct function with the current product
@@ -24,14 +28,20 @@ function SingleProductPage() {
   }, []);
 
   return (
+    
     <div className="product-container" key={singleProduct._id}>
+    <div className="back-button">
+    <button onClick={() => navigate(-1)}>Back</button>
+    </div>
+
       <div className="product-image">
         <img
           className="card-img-top product-img"
           src={singleProduct.img}
           alt="Card image cap"
         />
-      </div>
+      </div>   
+
       <div className="product-details">
         <div className="card" style={{ width: "18rem" }}>
           <div className="card-body">
@@ -49,7 +59,11 @@ function SingleProductPage() {
           </select>
 
             <p className="card-text">Price: ${singleProduct.price}</p>
-            <button onClick={handleAddToCart}>Add to Cart</button>
+            <p className="card-text">Availability: {singleProduct.availability}</p>
+            {singleProduct.availability>0 ?<p className="card-text" style={{color: "green"}}> InStock</p>:<p className="card-text" style={{color:"red"}}> Out Of Stock</p>}
+        
+            <button onClick={()=>{addProduct(singleProduct._id)}}>Add to Cart</button>
+
 
           </div>
         </div>
@@ -59,35 +73,5 @@ function SingleProductPage() {
     </div>
   );
 
-  //   return (
-  //    <div
-  //       className="card-content"
-  //       key={singleProduct._id}>
-  //       <div className="card" style={{ width: "18rem" }}>
-  //         <img
-  //           className="card-img-top product-img"
-  //           src={singleProduct.img}
-  //           alt="Card image cap"
-  //         />
-  //         <div className="card-body">
-  //           <h5 className="card-title">{singleProduct.title}</h5>
-  //           <p className="card-text">{singleProduct.desc}</p>
-  //           <p className="card-text">Category: {singleProduct.categories}</p>
-
-  //            {/* <p className="card-text">
-  //                 Available Size: {singleProduct.size.map} */}
-  //                 {/* {singleProduct.size[1]},
-  //                 {singleProduct.size[2]} */}
-  //               {/* </p>  */}
-  //               <p>
-  //               Size: {singleProduct.size?.map((size,index)=>{
-  //                return(<p key={index}> {size} </p>)
-  //               })}
-  //               </p>
-  //           <p className="card-text">Price: ${singleProduct.price}</p>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
 }
 export default SingleProductPage;

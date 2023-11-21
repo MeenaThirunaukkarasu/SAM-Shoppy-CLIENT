@@ -24,6 +24,9 @@ function Kids() {
 
   return (
     <div>
+    <div className="back-button">
+    <button onClick={() => navigate(-1)}>Back</button>
+    </div> 
       {kidsProduct.map((kidsProduct) => {
         return (
           <div className="card-content" key={kidsProduct._id} onClick={() => {

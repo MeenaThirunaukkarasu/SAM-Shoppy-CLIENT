@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Men() {
   const [menProduct, setMenProduct] = useState([]);
   const navigate = useNavigate();
+  
   useEffect(() => {
     // console.log("men product page");
     axios
@@ -22,12 +23,18 @@ function Men() {
 
 
   return (
+    <div>
+
     <div className="container">
+       <div className="back-button">
+    <button onClick={() => navigate(-1)}>Back</button>
+    </div> 
+
       <div className="card-content">
         {menProduct.map((menProduct) => {
           return (
             <div
-              className="card"
+              className="card card-details"
               key={menProduct._id}
               onClick={() => {
                 singleProduct(menProduct._id);
@@ -47,36 +54,9 @@ function Men() {
         })}
       </div>
     </div>
+    </div>
   );
 
-//   return (
-//     <div>
-//       {menProduct.map((menProduct) => {
-//         return (
-//           <div
-//             className="card-content"
-//             key={menProduct._id}
-//             onClick={() => {
-//               singleProduct(menProduct._id);
-//             }}
-//           >
-//             <div className="card" style={{ width: "18rem" }}>
-//               <img
-//                 className="card-img-top product-img"
-//                 src={menProduct.img}
-//                 alt="Card image cap"
-//               />
-//               <div className="card-body">
-//                 <h5 className="card-title">{menProduct.title}</h5>
-               
-//                 <p className="card-text">Price: ${menProduct.price}</p>
-//               </div>
-//             </div>
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
 }
 
 export default Men;

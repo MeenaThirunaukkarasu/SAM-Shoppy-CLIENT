@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-// import { CartContext } from "../context/cart.context";
+import { CartContext } from "../context/cart.context";
 
 function NavBar() {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider `value` prop
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  // const { cart } = useContext(CartContext);
+  const { isLoggedIn, user, logOutUser} = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
   return (
     <div>
       <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
@@ -40,18 +40,22 @@ function NavBar() {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-              <Link to="/feature" className="nav-link " aria-current="page">
-              Features
-                </Link>
-               
-              </li>
+              
               <li className="nav-item">
               <Link to="/pricing" className="nav-link " aria-current="page">
               Pricing
                 </Link>
                
               </li>
+
+
+              {user?.role==='admin'&& <li className="nav-item">
+              <Link to="/admin" className="nav-link " aria-current="page">
+              Admin
+                </Link>
+               
+              </li>}
+              
               <li className="nav-item dropdown">
               <Link to="/pricing"  className="nav-link dropdown-toggle"
                   href="#"
@@ -117,8 +121,10 @@ function NavBar() {
                   <li>
                     <button onClick={logOutUser}>Logout</button>
                   </li>
-                  <li>
-                    <button>👜</button>
+                  <li className="nav-item">
+                  <Link to="/cart" className="nav-link">
+                    <button>👜{cart.length} items</button>
+                    </Link>
                   </li>
                 </>
               )}

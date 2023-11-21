@@ -13,13 +13,17 @@ import Women from './pages/Women'
 import Boys from './pages/Boys'
 import Girls from './pages/Girls'
 import SingleProductPage from './pages/SingleProductPage'
-// import CartPage from './pages/CartPage'
+import CartPage from './pages/CartPage'
+import AdminPage from './pages/AdminPage'
+import ViewProductAdmin from './components/ ViewProductAdmin'
+
 
 function App() {
 
   return (
     <div>
     <NavBar />
+    
     <Menu />
     
     <Routes>
@@ -31,10 +35,14 @@ function App() {
       <Route path="/boys" element={ <Boys /> } />
       <Route path="/girls" element={ <Girls /> } />
       <Route path="/product/:id" element={ <SingleProductPage /> } />
+      <Route path="/cart" element={ <CartPage /> } />
+      <Route path="/admin" element={ <AdminPage /> } />
+      {/* <Route path="/category" element={ <ViewProductAdmin /> } /> */}
     </Routes>
     
-   {/* <CartPage /> */}
+   
     
+
     </div>
   )
 }
