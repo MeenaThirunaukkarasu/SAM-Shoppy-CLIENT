@@ -1,142 +1,127 @@
-import React from "react";
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { CartContext } from "../context/cart.context";
-
 function NavBar() {
-  // Subscribe to the AuthContext to gain access to
-  // the values from AuthContext.Provider `value` prop
-  const { isLoggedIn, user, logOutUser} = useContext(AuthContext);
-  const { cart } = useContext(CartContext);
+    const { isLoggedIn, user, logOutUser} = useContext(AuthContext);
+    const { cart } = useContext(CartContext);
+    useEffect(() => {
+      const handleClick = (event) => {
+        const dropdownToggle = event.target.closest('.dropdown-toggle');
+  
+        if (dropdownToggle) {
+          dropdownToggle.classList.toggle('toggle-change');
+        }
+      };
+  
+      document.addEventListener('click', handleClick);
+  
+      return () => {
+        document.removeEventListener('click', handleClick);
+      };
+    }, []);
+  
+
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
-        <div className="container">
-          {/* <a className="navbar-brand" href="#">
-            Navbar
-          </a> */}
-          <img
+    <div><nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div className="container">
+      <a className="navbar-brand" href="#"> <img
             src="/logo.png"
             className="logo"
             alt="Description of the image"
-          ></img>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                
-                <Link to="/" className="nav-link active" aria-current="page">
-                  Home
-                </Link>
-              </li>
-              
-              <li className="nav-item">
-              <Link to="/pricing" className="nav-link " aria-current="page">
-              Pricing
-                </Link>
-               
-              </li>
-
-
-              {user?.role==='admin'&& <li className="nav-item">
-              <Link to="/admin" className="nav-link " aria-current="page">
-              Admin
-                </Link>
-               
-              </li>}
-              
-              <li className="nav-item dropdown">
-              <Link to="/pricing"  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
+          ></img></a>
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          {user?.role==='admin'&& (<>
+        
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin">products</Link>
+        
+          </li>
+          </>)}
+          <li className="nav-item dropdown">
+            <Link className="nav-link dropdown-toggle" to="/categories" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
-                </Link>
-               
-             
-                <ul className="dropdown-menu">
-                  <li>
+            </Link>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
                      <Link to='/products' state={{category:'men'}} className="dropdown-item">Men</Link>
                   </li>
                   <li>
                     <Link to='/products' state={{category:'women'}} className="dropdown-item" >Women</Link>
                   </li>
-                  {/* <li>
-                    <Link to='/kids' className="dropdown-item" >kids</Link>
-                  </li>  */}
+                
                   <li>
                     <Link to='/products' state={{category:'boys'}} className="dropdown-item" >Boys</Link>
                   </li>
                   <li>
                     <Link to='/products' state={{category:'girls'}} className="dropdown-item" >Girls</Link>
                   </li>
-                </ul>
-              </li>
-
-              <li className="nav-item">
-                
-              </li>
+            </ul>
+          </li>
+        </ul>
+        <form className="d-flex" role="search">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
+        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu"> 
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {isLoggedIn ? (
+                <>
+              <div className="profile-pic">
+                  <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture"/>
+                  <span className="user">{user && user.name}</span>
+               </div>
+               </>
+            ):(
+                <div className="profile-pic not-login">
+                  <img src="/login.png" alt="Profile Picture"/>
+                  <span className="user">Guest</span>
+               </div>
+            )}
+{/*          
+             <!--  <i className="fas fa-user"></i> --> */}
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              
               {!isLoggedIn ? (
                 <>
-                  <li className="nav-item">
-                    <Link to="/signup" className="nav-link">
-                      Sign Up
-                    </Link>
-                  </li>
+              <li><Link className="dropdown-item" to="/signup"><i className="fas fa-cog fa-fw"></i> Sign Up</Link></li>
+              <li><Link className="dropdown-item" to="/login"><i className="fas fa-cog fa-fw"></i> Login</Link></li>
+              </>
+              ):(
 
-                  <li className="nav-item">
-                    <Link to="/login" className="nav-link">
-                      Login
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                // If user is logged in, show user's name and logout button
                 <>
-                  <li>
-                  <a href="">
-                 
-                    <img
-                      src="/login.png"
-                      className="human-icon"
-                      alt="human icon"
-                    ></img>
-                     </a>
-                    <span className="user">{user && user.name}</span>
-                  </li>
-                <li> <i className="bi bi-bag"></i></li>
-                
-                  <li>
-                    <button onClick={logOutUser}>Logout</button>
-                  </li>
-                  <li className="nav-item">
-                  <Link to="/cart" className="nav-link">
-                    <button>👜{cart.length} items</button>
-                    </Link>
-                  </li>
+                <li><Link className="dropdown-item" href="#"><i className="fas fa-sliders-h fa-fw"></i> Account</Link></li>
+              <li><Link className="dropdown-item" href="#"><i className="fas fa-cog fa-fw"></i> Settings</Link></li>
+              <li><hr className="dropdown-divider"/></li>
+                <li onClick={logOutUser} ><Link className="dropdown-item"  ><i className="fas fa-sign-out-alt fa-fw"></i> Log Out</Link></li>
+
                 </>
+
               )}
             </ul>
-          </div>
-        </div>
-      </nav>
-      {/* <button>
-        Cart ({cart.length})
-      </button> */}
+          </li>
+       </ul>
+       
+       <button>
+       <Link to="/cart" className="nav-link">
+                    <i className="bi bi-bag-fill"></i> {cart.length} items
+                    </Link>
+                    </button>
+      </div>
     </div>
-  );
+  </nav>
+  </div>
+  )
 }
 
 export default NavBar;

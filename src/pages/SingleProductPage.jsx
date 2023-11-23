@@ -28,9 +28,10 @@ function SingleProductPage() {
   }, []);
 
   return (
-    
-    <div className="product-container" key={singleProduct._id}>
-    <div className="back-button">
+    <div className="container text-center" key={singleProduct._id}>
+    <div className="row row-cols-2">
+      <div className="col" > 
+         <div className="back-button d-flex">
     <button onClick={() => navigate(-1)}>Back</button>
     </div>
 
@@ -40,10 +41,11 @@ function SingleProductPage() {
           src={singleProduct.img}
           alt="Card image cap"
         />
-      </div>   
-
+      </div>  
+       </div>
+      <div className="col">
       <div className="product-details">
-        <div className="card" style={{ width: "18rem" }}>
+        <div className="card border-0" >
           <div className="card-body">
             <h5 className="card-title">{singleProduct.title}</h5>
             <p className="card-text">{singleProduct.desc}</p>
@@ -67,10 +69,11 @@ function SingleProductPage() {
 
           </div>
         </div>
-      </div>
-      {/* Add to Cart button */}
-     
+      </div></div>
     </div>
+  </div>
+
+    
   );
 
 }

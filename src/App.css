@@ -8,11 +8,14 @@ width: 100%;
 }
  
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 3rem;
   will-change: filter;
   transition: filter 300ms;
   /* background: none; */
+}
+.common-margin{
+  margin-top:80px;
+  padding:30px 0;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -72,51 +75,44 @@ width: 100%;
 .user{
   margin-left: 600px;
 }
-.product-img{
+/* .product-img{
   height: 80%;
   width:80%;
   margin: auto;
-}
-.card-content{
+} */
+/* .card-content{
   width: 20%;
   margin: 10px auto 10px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 
-}
+} */
 .card-details {
   margin-bottom: 15px; 
   padding: 2em;
 }
-.container {
+/* .container {
   max-width: 1200px; 
   margin: 0 auto; 
-}
-.product-container {
+} */
+/* .product-container {
   display: flex;
   justify-content: space-between;
   max-width: 1000%; 
   margin: 0 auto; 
+} */
+.product-details .card{
+  margin-top: 4.7rem;
 }
 .product-image {
   max-width: 800px;
   max-height: 900px;
   margin-top: auto;
   padding-bottom: 2.5rem;
-    padding-top: 2.5rem;
+    padding-top: 30px;
 }
-.product-details {
-  max-width: 1000px;
-  max-height: 700px;
-  margin-top: auto;
-  margin-right: 600px;
-  padding-bottom: 2.5rem;
-    padding-top: 2.5rem;
-}
-.back-button{
-  margin-top: 140px;
-}
+
 .cartImage img{
   max-width: 100px;
   max-height: 900px;
@@ -134,3 +130,35 @@ gap: 10px;
 border: 1px solid  black;
 /* padding: 20px; */
 }
+
+
+
+/* NavBar Css starts */
+/* Profile Picture */
+.profile-pic{
+  display: inline-block;
+  vertical-align: middle;
+   width: 50px;
+   height: 50px;
+   overflow: hidden;
+  border-radius: 50%;
+}
+.profile-pic img{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.profile-menu .dropdown-menu {
+ right: 0;
+ left: unset;
+}
+.profile-menu .fa-fw {
+ margin-right: 10px;
+}
+
+.toggle-change::after {
+ border-top: 0;
+ border-bottom: 0.3em solid;
+}
+
+/* NavBar Css Ends */

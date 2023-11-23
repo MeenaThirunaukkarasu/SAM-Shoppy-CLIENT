@@ -20,20 +20,46 @@ function CreateProduct() {
       desc: e.target.desc.value,
       img: e.target.img.value,
       availability: e.target.availability.value,
-      inStock: e.target.inStock.value,
+      // inStock: e.target.inStock.value,
       categories: e.target.categories.value,
-      size: e.target.size.value,
+      // size: e.target.size.value,
       price: e.target.price.value,
     };
-console.log(productData)
+    console.log(productData)
 
-    axios.post(`http://localhost:5005/product`, productData)
+    axios.post(`http://localhost:5005/products`, productData)
       .then(response => {
         console.log(response.data)
       })
+      .catch(err => {
+        console.error(err)
+      })
 
-    setView(null);
+    // setView(null);
   };
+
+  
+//   const handleSave = (e) => {
+//     e.preventDefault();
+//     const productData = {
+//       title: e.target.title.value,
+//       desc: e.target.desc.value,
+//       img: e.target.img.value,
+//       availability: e.target.availability.value,
+//       inStock: e.target.inStock.value,
+//       categories: e.target.categories.value,
+//       size: e.target.size.value,
+//       price: e.target.price.value,
+//     };
+// console.log(productData)
+
+//     axios.post(`http://localhost:5005/product`, productData)
+//       .then(response => {
+//         console.log(response.data)
+//       })
+
+//     setView(null);
+//   };
 
   return (
     <form onSubmit={handleSave}>
