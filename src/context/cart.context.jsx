@@ -3,19 +3,26 @@ import axios from "axios";
 
 const CartContext = React.createContext();
 
+
+
 function CartProviderWrapper(props) {
   const [cart, setCart] = useState([]);
+
   useEffect(() => {
-    axios.get("http://localhost:5005/cart").then((cart) => {
+    const storedToken = localStorage.getItem('authToken');
+    axios.get("http://localhost:5005/cart", 
+    { headers: { Authorization: `Bearer ${storedToken}`} }
+    ).then((cart) => {
       setCart(cart.data);
     });
   }, []);
   // Add a function to add a product to the cart
   const addProduct = (productId) => {
-    console.log(productId);
+    const storedToken = localStorage.getItem('authToken');
     // // Create a copy of the current cart state
     axios
-      .post("http://localhost:5005/cart/add", { productId })
+      .post("http://localhost:5005/cart/add", { productId }, { headers: { Authorization: `Bearer ${storedToken}`} }
+      )
       .then((addedProducts) => {
         console.log(addedProducts);
         window.location.reload();
@@ -39,6 +46,7 @@ function CartProviderWrapper(props) {
   // delete a function to delete a product to the cart
   const deleteProduct = (productId) => {
     console.log(productId);
+    setCart((prevCart) => prevCart.filter(item => item.product._id !== productId));
     // // Create a copy of the current cart state
     axios
       .delete(`http://localhost:5005/cart/delete/${productId}`)
