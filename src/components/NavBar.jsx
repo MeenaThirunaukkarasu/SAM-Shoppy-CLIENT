@@ -5,7 +5,8 @@ import { AuthContext } from "../context/auth.context";
 import { CartContext } from "../context/cart.context";
 function NavBar() {
     const { isLoggedIn, user, logOutUser} = useContext(AuthContext);
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
+
     useEffect(() => {
       const handleClick = (event) => {
         const dropdownToggle = event.target.closest('.dropdown-toggle');
@@ -21,6 +22,13 @@ function NavBar() {
         document.removeEventListener('click', handleClick);
       };
     }, []);
+
+    const logout = () => {
+
+      setCart([])
+      logOutUser()
+
+    }
   
 
   return (
@@ -37,7 +45,8 @@ function NavBar() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <Link to="/home" className="nav-link active" aria-current="page">Home</Link>
+           
           </li>
           {user?.role==='admin'&& (<>
         
@@ -77,13 +86,13 @@ function NavBar() {
             {isLoggedIn ? (
                 <>
               <div className="profile-pic">
-                  <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture"/>
+                  <img src="/account-logo.png" alt="Profile Picture"/>
                   <span className="user">{user && user.name}</span>
                </div>
                </>
             ):(
                 <div className="profile-pic not-login">
-                  <img src="/login.png" alt="Profile Picture"/>
+                  <img src="/account-logo.png" alt="Profile Picture"/>
                   <span className="user">Guest</span>
                </div>
             )}
@@ -103,7 +112,7 @@ function NavBar() {
                 <li><Link className="dropdown-item" href="#"><i className="fas fa-sliders-h fa-fw"></i> Account</Link></li>
               <li><Link className="dropdown-item" href="#"><i className="fas fa-cog fa-fw"></i> Settings</Link></li>
               <li><hr className="dropdown-divider"/></li>
-                <li onClick={logOutUser} ><Link className="dropdown-item"  ><i className="fas fa-sign-out-alt fa-fw"></i> Log Out</Link></li>
+                <li onClick={logout} ><Link className="dropdown-item"  ><i className="fas fa-sign-out-alt fa-fw"></i> Log Out</Link></li>
 
                 </>
 
@@ -114,7 +123,7 @@ function NavBar() {
        
        <button>
        <Link to="/cart" className="nav-link">
-                    <i className="bi bi-bag-fill"></i> {cart.length} items
+                    <i className="bi bi-bag-fill"></i> {cart?.length} items
                     </Link>
                     </button>
       </div>

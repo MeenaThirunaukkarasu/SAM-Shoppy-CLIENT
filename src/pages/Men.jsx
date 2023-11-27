@@ -18,6 +18,7 @@ function Men() {
         console.log(error);
       });
   }, [location.state?.category]);
+  
   function singleProduct(id) {
     navigate(`/product/${id}`);
   }

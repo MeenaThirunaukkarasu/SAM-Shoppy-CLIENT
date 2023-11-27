@@ -15,6 +15,7 @@ import IsAdmin from './components/IsAdmin';
 import NavBar from './components/NavBar'
 /* src/index.css or src/index.scss */
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import CheckoutPage from './pages/CheckoutPage'
 
 
 function App() {
@@ -34,8 +35,11 @@ function App() {
       <Route path="/products" element={<Men />} />
       <Route path="/product/:id" element={ <SingleProductPage /> } />
       <Route path="/cart" element={ <CartPage /> } />
+      <Route path="/home" element={ <HomePage /> } />
+
       {/* <Route path="/category" element={ <ViewProductAdmin /> } /> */}
       <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
+      <Route path="/checkout" element={ <CheckoutPage /> } />
 
     </Routes>
     </div>

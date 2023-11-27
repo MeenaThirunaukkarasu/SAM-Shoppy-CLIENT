@@ -1,27 +1,46 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CartContext = React.createContext();
 
-
-
 function CartProviderWrapper(props) {
+  const navigate = useNavigate();
+
   const [cart, setCart] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const refreshCart = () => {
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .get("http://localhost:5005/cart", {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        console.log("***");
+        console.log(response.data);
+        setCart(response.data.product);
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    axios.get("http://localhost:5005/cart", 
-    { headers: { Authorization: `Bearer ${storedToken}`} }
-    ).then((cart) => {
-      setCart(cart.data);
-    });
+    refreshCart();
   }, []);
+
   // Add a function to add a product to the cart
   const addProduct = (productId) => {
-    const storedToken = localStorage.getItem('authToken');
+    const storedToken = localStorage.getItem("authToken");
     // // Create a copy of the current cart state
+    if (!storedToken) {
+      navigate("/login");
+      return;
+    }
     axios
-      .post("http://localhost:5005/cart/add", { productId }, { headers: { Authorization: `Bearer ${storedToken}`} }
+      .post(
+        "http://localhost:5005/cart/add",
+        { productId },
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((addedProducts) => {
         console.log(addedProducts);
@@ -30,26 +49,46 @@ function CartProviderWrapper(props) {
       .catch((error) => {
         console.log("error", error);
       });
-    // // Check if the product is already in the cart
-    // const existingProduct = newCart.find((item) => item.id === product.id);
-
-    // if (existingProduct) {
-    //   // If the product is already in the cart, update its quantity
-    //   existingProduct.quantity += 1;
-    // } else {
-    //   // If the product is not in the cart, add it with a quantity of 1
-    //   newCart.push({ ...product, quantity: 1 });
-    // }
-
-    // // Update the cart state with the new cart
   };
   // delete a function to delete a product to the cart
+  const deleteOne = (productId) => {
+    console.log(productId);
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.product._id !== productId)
+    );
+    // // Create a copy of the current cart state
+    const storedToken = localStorage.getItem("authToken");
+    if (!storedToken) {
+      navigate("/login");
+      return;
+    }
+    axios
+      .delete(`http://localhost:5005/cart/delete/${productId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((deletedProducts) => {
+        console.log(deletedProducts);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
   const deleteProduct = (productId) => {
     console.log(productId);
-    setCart((prevCart) => prevCart.filter(item => item.product._id !== productId));
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.product._id !== productId)
+    );
     // // Create a copy of the current cart state
+    const storedToken = localStorage.getItem("authToken");
+    if (!storedToken) {
+      navigate("/login");
+      return;
+    }
     axios
-      .delete(`http://localhost:5005/cart/delete/${productId}`)
+      .delete(`http://localhost:5005/cart/deleteProduct/${productId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((deletedProducts) => {
         console.log(deletedProducts);
         window.location.reload();
@@ -63,8 +102,11 @@ function CartProviderWrapper(props) {
       value={{
         cart,
         setCart,
+        refreshCart,
         addProduct, // Include the addProduct function in the context
         deleteProduct, // Include the deleteProduct function in the context
+        isLoading,
+        deleteOne
       }}
     >
       {props.children}

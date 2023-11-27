@@ -10,11 +10,10 @@ function SingleProductPage() {
   const navigate = useNavigate();
   const { addProduct } =  useContext(CartContext)
 
-  // const { addProduct } = useContext(CartContext);
-  const handleAddToCart = () => {
-    // Call the addProduct function with the current product
-    // addProduct(product);
-  };
+  // const handleAddToCart = (product) => {
+  //   // Call the addProduct function with the current product
+  //   addProduct(product);
+  // };
 //   const availableSizes = singleProduct.size || [];
   useEffect(() => {
     axios
@@ -64,7 +63,7 @@ function SingleProductPage() {
             <p className="card-text">Availability: {singleProduct.availability}</p>
             {singleProduct.availability>0 ?<p className="card-text" style={{color: "green"}}> InStock</p>:<p className="card-text" style={{color:"red"}}> Out Of Stock</p>}
         
-            <button onClick={()=>{addProduct(singleProduct._id)}}>Add to Cart</button>
+            {singleProduct.inStock ? <button onClick={()=>{addProduct(singleProduct._id)}}>Add to Cart</button>: <></>}
 
 
           </div>
