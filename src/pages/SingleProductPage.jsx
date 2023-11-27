@@ -9,12 +9,13 @@ function SingleProductPage() {
   const productId = useParams();
   const navigate = useNavigate();
   const { addProduct } =  useContext(CartContext)
+  const defaultSize= singleProduct.size && singleProduct.size.length > 0 ? singleProduct.size[0] : '';
+  const  [size,setSize]=useState()
+  
+useEffect(() => {
+  setSize(defaultSize);
+}, [defaultSize]);
 
-  // const handleAddToCart = (product) => {
-  //   // Call the addProduct function with the current product
-  //   addProduct(product);
-  // };
-//   const availableSizes = singleProduct.size || [];
   useEffect(() => {
     axios
       .get(`http://localhost:5005/products/${productId.id}`)
@@ -25,7 +26,6 @@ function SingleProductPage() {
         console.log(error);
       });
   }, []);
-
   return (
     <div className="container text-center" key={singleProduct._id}>
     <div className="row row-cols-2">
@@ -51,20 +51,19 @@ function SingleProductPage() {
             <p className="card-text">Category: {singleProduct.categories}</p>
             
           <label htmlFor="sizeSelect">Size:</label>
-          <select id="sizeSelect" onChange={(e) => console.log(e.target.value)}>
-            {singleProduct.size?.map((size, index) => (
-              <option key={index} >
-                {size}
+          <select id="sizeSelect" name='size' onChange={(e)=>{setSize(e.target.value )}} value={size} >
+            {
+              singleProduct.size?.map((sizeOption, index) => (
+              <option  key={index} value={sizeOption}>
+                {sizeOption}
               </option>
             ))}
           </select>
-
             <p className="card-text">Price: ${singleProduct.price}</p>
             <p className="card-text">Availability: {singleProduct.availability}</p>
             {singleProduct.availability>0 ?<p className="card-text" style={{color: "green"}}> InStock</p>:<p className="card-text" style={{color:"red"}}> Out Of Stock</p>}
-        
-            {singleProduct.inStock ? <button onClick={()=>{addProduct(singleProduct._id)}}>Add to Cart</button>: <></>}
-
+            {singleProduct.inStock ? <button onClick={()=>{addProduct(singleProduct._id,size)}}  >Add to Cart</button>: <></>}
+         
 
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
@@ -6,6 +6,20 @@ import { CartContext } from "../context/cart.context";
 function NavBar() {
     const { isLoggedIn, user, logOutUser} = useContext(AuthContext);
     const { cart, setCart } = useContext(CartContext);
+    const [totalCartItems,setTotalCartItems]=useState(0)
+    useEffect(() => {
+      let totalItems = 0;
+    
+      // Check if cart is not null or undefined
+      if (cart) {
+        cart.cartDetails?.forEach((cartDetail) => {
+          totalItems += cartDetail.quantity;
+        });
+      }
+    
+      setTotalCartItems(totalItems);
+    }, [cart]);
+    
 
     useEffect(() => {
       const handleClick = (event) => {
@@ -123,7 +137,7 @@ function NavBar() {
        
        <button>
        <Link to="/cart" className="nav-link">
-                    <i className="bi bi-bag-fill"></i> {cart?.length} items
+                    <i className="bi bi-bag-fill"></i> {totalCartItems} items
                     </Link>
                     </button>
       </div>

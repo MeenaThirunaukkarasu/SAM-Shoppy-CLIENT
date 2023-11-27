@@ -6,91 +6,45 @@ import { CartContext } from "./../context/cart.context";
 function CartPage() {
   const { cart, setCart, addProduct, deleteProduct,deleteOne, isLoading } = useContext(CartContext);
   const [groupedCart, setGroupedCart] = useState([])
-  
-
+  const [totalCartItems,setTotalCartItems]=useState(0)
   useEffect(() => {
-    console.log(cart);
-
-    // if (!Array.isArray("cart:", cart)) {
-    //   console.error("Error: Cart is not an array.");
-    //   return;
-    // }
-    if(!isLoading){
-      console.log("testing", cart )
-      let tempGroupedCart = cart?.reduce((acc, current) => {
-        if (!current || current.length === 0) {
-          console.error("Error: Current item has no product property or an empty product array", current);
-          return acc;
-        }
-
-        const existingItem = acc.find((item) =>
-          deepEqual(item.product, current)
-        );
-
-          if (existingItem) {
-            existingItem.times += 1;
-          } else {
-            acc.push({ product: current, times: 1 });
-          }
-
-          return acc;
-        }, [])
-      setGroupedCart(tempGroupedCart);
-    console.log("Grouped Cart:", groupedCart);}
-  }, [isLoading]);
-
-  function deepEqual(obj1, obj2) {
-    if (obj1 === obj2) {
-      return true;
+    let totalItems = 0;
+  console.log('cart',cart)
+    // Check if cart is not null or undefined
+    if (cart) {
+      cart.cartDetails?.forEach((cartDetail) => {
+        totalItems += cartDetail.quantity;
+      });
     }
+    setTotalCartItems(totalItems);
+  }, [cart]);
 
-    if (
-      typeof obj1 !== "object" ||
-      obj1 === null ||
-      typeof obj2 !== "object" ||
-      obj2 === null
-    ) {
-      return false;
-    }
-
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-
-    if (keys1.length !== keys2.length) {
-      return false;
-    }
-
-    for (const key of keys1) {
-      if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) {
-        return false;
-      }
-    }
-
-    return true;
+  
+  
+  function decrement(id,size) {
+    deleteOne(id,size);
   }
-  function decrement(id) {
-    deleteOne(id);
+  function increment(id,size) {
+    addProduct(id,size);
   }
-  function increment(id) {
-    addProduct(id);
-  }
-  function removeItem(id) {
-    deleteProduct(id);
+  function removeItem(id,size) {
+    console.log('size',size)
+    deleteProduct(id,size);
     console.log("Updated Cart:", cart);
   }
   // Calculate the total cost for each item
   const calculateItemTotal = (item) => {
     // Assuming item.product.price is the price of the individual item
-    return item.product.price * item.times;
+    return item.product.price * item.quantity;
   };
 
   // Calculate the overall total
-  const calculateOverallTotal = () => {
-    return groupedCart?.reduce(
-      (total, item) => total + calculateItemTotal(item),
-      0
-    );
-  };
+  // const calculateOverallTotal = () => {
+  //   return groupedCart?.reduce(
+  //     (total, item) => total + calculateItemTotal(item),
+  //     0
+  //   );
+  // };
 
   return isLoading ? <div>Loading...</div> : (
     <section className="h-100 gradient-custom">
@@ -99,12 +53,13 @@ function CartPage() {
           <div className="col-md-8">
             <div className="card mb-4">
               <div className="card-header py-3">
-                <h5 className="mb-0">Cart - {cart?.length} items</h5>
+                <h5 className="mb-0">Cart - {totalCartItems} items</h5>
               </div>
               <div className="card-body">
-                {groupedCart?.map((item) => (
+                {cart.cartDetails?.map((item) => {
+               return (
                   <div className="row" key={item.product._id}>
-                  <p>{item.product.title} - Quantity: {item.times}</p>
+                  {/* <p>{item.product.title} - Quantity: {item.times}</p> */}
                     <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                       <div
                         className="bg-image hover-overlay hover-zoom ripple rounded"
@@ -130,14 +85,17 @@ function CartPage() {
                       <p>
                         <strong>{item.product.title}</strong>
                       </p>
+                      <p>
+                        Size:{item.size}
+                      </p>
                       {/* <p>Color: blue</p> */}
-                      <p>Size: M</p>
+                      {/* /<p>Size: M</p> */}
                       <button
                         type="button"
                         className="btn btn-primary btn-sm me-1 mb-2"
                         data-mdb-toggle="tooltip"
                         title="Remove item"
-                        onClick={() => removeItem(item.product._id)}
+                        onClick={() => removeItem(item.product._id,item.size)}
                       >
                         <i className="bi bi-trash"></i>
                       </button>
@@ -157,16 +115,16 @@ function CartPage() {
                       >
                         <button
                           className="btn btn-primary px-3 me-2"
-                          onClick={() => decrement(item.product._id)}
+                          onClick={() => decrement(item.product._id,item.size)}
                         >
                           <i className="bi bi-dash"></i>
                         </button>
                         <div className="form-outline">
-                          <p className="count-number">{item.times}</p>
+                          <p className="count-number">{item.quantity}</p>
                         </div>
                         <button
                           className="btn btn-primary px-3 ms-2"
-                          onClick={() => increment(item.product._id)}
+                          onClick={() => increment(item.product._id,item.size)}
                         >
                           <i className="bi bi-plus"></i>
                         </button>
@@ -176,7 +134,8 @@ function CartPage() {
                       </p>
                     </div>
                   </div>
-                ))}
+                )}
+                )}
                 <hr className="my-4" />
               </div>
             </div>
@@ -229,7 +188,7 @@ function CartPage() {
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                     Products
-                    <span>${calculateOverallTotal()?.toFixed(2)}</span>
+                    {/* <span>${calculateOverallTotal()?.toFixed(2)}</span> */}
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center px-0">
                     Shipping
@@ -243,7 +202,7 @@ function CartPage() {
                       </strong>
                     </div>
                     <span>
-                      <strong>${calculateOverallTotal()?.toFixed(2)}</strong>
+                      {/* <strong>${calculateOverallTotal()?.toFixed(2)}</strong> */}
                     </span>
                   </li>
                 </ul>
