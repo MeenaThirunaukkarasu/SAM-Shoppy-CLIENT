@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import axios from 'axios'
 import { AuthContext } from "../context/auth.context";
-import AddAddress from '../components/AddAddress'
+import AddAddress from '../components/AddAddress';
+// import Payment from '../components/Payment'
 
 function UserAccountPage(){
     const {  user } = useContext(AuthContext);
@@ -40,6 +41,7 @@ axios.get('http://localhost:5005/address')
                 )
             })}
             {formView && <AddAddress setFormView={setFormView}/>}
+            {/* <Payment /> */}
         </div>
     )
 }
