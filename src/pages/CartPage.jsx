@@ -7,19 +7,34 @@ function CartPage() {
   const { cart, setCart, addProduct, deleteProduct,deleteOne, isLoading } = useContext(CartContext);
   const [groupedCart, setGroupedCart] = useState([])
   const [totalCartItems,setTotalCartItems]=useState(0)
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [expectedDeliveryDate, setExpectedDeliveryDate] = useState(new Date());
+  // useEffect(() => {
+  //   let totalItems = 0;
+  // console.log('cart',cart)
+  //   // Check if cart is not null or undefined
+  //   if (cart) {
+  //     cart.cartDetails?.forEach((cartDetail) => {
+  //       totalItems += cartDetail.quantity;
+  //     });
+  //   }
+  //   setTotalCartItems(totalItems);
+  // }, [cart]);
+
   useEffect(() => {
-    let totalItems = 0;
-  console.log('cart',cart)
-    // Check if cart is not null or undefined
     if (cart) {
-      cart.cartDetails?.forEach((cartDetail) => {
+      // If you want to use groupedCart, set its value here
+      setGroupedCart(cart.cartDetails || []);
+    }
+  
+    let totalItems = 0;
+    if (cart?.cartDetails) {
+      cart.cartDetails.forEach((cartDetail) => {
         totalItems += cartDetail.quantity;
       });
     }
     setTotalCartItems(totalItems);
   }, [cart]);
-
-  
   
   function decrement(id,size) {
     deleteOne(id,size);
@@ -39,12 +54,18 @@ function CartPage() {
   };
 
   // Calculate the overall total
-  // const calculateOverallTotal = () => {
-  //   return groupedCart?.reduce(
-  //     (total, item) => total + calculateItemTotal(item),
-  //     0
-  //   );
-  // };
+  const calculateOverallTotal = () => {
+    return groupedCart?.reduce(
+      (total, item) => total + calculateItemTotal(item),
+      0
+    );
+  };
+  useEffect(() => {
+    const newExpectedDeliveryDate = new Date(currentDate);
+    newExpectedDeliveryDate.setDate(currentDate.getDate() + 2); // Add one day
+    setExpectedDeliveryDate(newExpectedDeliveryDate);
+  }, [currentDate]);
+  
 
   return isLoading ? <div>Loading...</div> : (
     <section className="h-100 gradient-custom">
@@ -144,7 +165,7 @@ function CartPage() {
                 <p>
                   <strong>Expected shipping delivery</strong>
                 </p>
-                <p className="mb-0">12.10.2020 - 14.10.2020</p>
+                <p className="mb-0"> On {`${expectedDeliveryDate.toLocaleDateString()}`}</p>
               </div>
             </div>
             <div className="card mb-4 mb-lg-0">
@@ -188,7 +209,7 @@ function CartPage() {
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                     Products
-                    {/* <span>${calculateOverallTotal()?.toFixed(2)}</span> */}
+                    <span>${calculateOverallTotal()?.toFixed(2)}</span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center px-0">
                     Shipping
@@ -202,7 +223,7 @@ function CartPage() {
                       </strong>
                     </div>
                     <span>
-                      {/* <strong>${calculateOverallTotal()?.toFixed(2)}</strong> */}
+                      <strong>${calculateOverallTotal()?.toFixed(2)}</strong>
                     </span>
                   </li>
                 </ul>

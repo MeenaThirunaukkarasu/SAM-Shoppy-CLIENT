@@ -13,16 +13,15 @@ function CartProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true);
   const refreshCart = () => {
     const storedToken = localStorage.getItem("authToken");
-
     axios
-      .get("http://localhost:5005/cart", {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        
-        setCart(response.data);
-        setIsLoading(false);
-      });
+    .get("http://localhost:5005/cart", {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then((response) => {
+      
+      setCart(response.data);
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -42,6 +41,7 @@ function CartProviderWrapper(props) {
       user:user._id,
       size:size
     }
+    console.log(cartDetails)
     axios
       .post(
         "http://localhost:5005/cart/add",

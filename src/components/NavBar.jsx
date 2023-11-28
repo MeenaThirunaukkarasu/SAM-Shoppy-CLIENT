@@ -123,7 +123,7 @@ function NavBar() {
               ):(
 
                 <>
-                <li><Link className="dropdown-item" href="#"><i className="fas fa-sliders-h fa-fw"></i> Account</Link></li>
+                <li><Link className="dropdown-item" to='/account'><i className="fas fa-sliders-h fa-fw"></i> Account</Link></li>
               <li><Link className="dropdown-item" href="#"><i className="fas fa-cog fa-fw"></i> Settings</Link></li>
               <li><hr className="dropdown-divider"/></li>
                 <li onClick={logout} ><Link className="dropdown-item"  ><i className="fas fa-sign-out-alt fa-fw"></i> Log Out</Link></li>

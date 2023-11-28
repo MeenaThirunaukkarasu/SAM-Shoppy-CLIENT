@@ -16,7 +16,7 @@ import NavBar from './components/NavBar'
 /* src/index.css or src/index.scss */
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import CheckoutPage from './pages/CheckoutPage'
-
+import UserAccountPage from './pages/UserAccountPage'
 
 function App() {
 
@@ -36,6 +36,7 @@ function App() {
       <Route path="/product/:id" element={ <SingleProductPage /> } />
       <Route path="/cart" element={ <CartPage /> } />
       <Route path="/home" element={ <HomePage /> } />
+      <Route path="/account" element={ <UserAccountPage /> } />
 
       {/* <Route path="/category" element={ <ViewProductAdmin /> } /> */}
       <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
