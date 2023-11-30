@@ -8,6 +8,7 @@ function AdminPage() {
   const [showList, setShowList] = useState(false);
   const create = () => {
     setView("create product");
+    setShowList(false)
   };
 
   return (
@@ -17,20 +18,20 @@ function AdminPage() {
       <button
         onClick={() => {
           setShowList(true);
+          setView('view product')
         }}
       >
         View Product
       </button>
-      {view &&  <ViewProductAdmin setShowList={setShowList} setView={setView} category={view} /> }
+      {view  &&  <ViewProductAdmin setShowList={setShowList} setView={setView} view={view} category={view} /> }
       {/* <EditProduct /> */}
       {view === "create product" && <CreateProduct setView={setView} />}
      {showList && <ul>
-        <li onClick={()=>{setView('men')}}>Men</li>
-        <li onClick={()=>{setView('women')}}>Women</li>
-        <li onClick={()=>{setView('boys')}}>Boys</li>
-        <li onClick={()=>{setView('girls')}}>Girls</li>
+        <li onClick={()=>{setView('men'); setShowList(false)}}>Men</li>
+        <li onClick={()=>{setView('women'); setShowList(false)}}>Women</li>
+        <li onClick={()=>{setView('boys'); setShowList(false)}}>Boys</li>
+        <li onClick={()=>{setView('girls'); setShowList(false)}}>Girls</li>
       </ul>}
     </div>
   );
-}
-export default AdminPage;
+}export default AdminPage;

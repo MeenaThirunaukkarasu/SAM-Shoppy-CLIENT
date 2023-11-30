@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-function CreateProduct() {
+function CreateProduct({setView}) {
     const [product, setProduct] = useState({});
 
   const handleInputChange = (e) => {
@@ -11,7 +11,7 @@ function CreateProduct() {
 
 
   const handleCancel = () => {
-    //  onCancel();
+setView(null)
   };
   const handleSave = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ function CreateProduct() {
     };
     console.log(productData)
 
-    axios.post(`http://localhost:5005/products`, productData)
+    axios.post(`http://localhost:5005/products/add`, productData)
       .then(response => {
         console.log(response.data)
       })
@@ -35,7 +35,7 @@ function CreateProduct() {
         console.error(err)
       })
 
-    // setView(null);
+    setView(null);
   };
 
   
@@ -131,5 +131,4 @@ function CreateProduct() {
     </form>
   );
 }
-
 export default CreateProduct;

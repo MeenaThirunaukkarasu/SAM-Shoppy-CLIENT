@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import EditProduct from './EditProduct'
 
-function ViewProductAdmin({setShowList, category, setView}) {
+function ViewProductAdmin({ setShowList, category, setView ,view}) {
   const [products, setProducts] = useState([]);
-
+const [editView,setEditview]=useState(null)
+const [idToUpdate,setIdToUpdate] = useState(null)
   useEffect(() => {
     // Fetch products based on the provided category (e.g., men, women, boys, girls)
     axios
@@ -17,22 +19,38 @@ function ViewProductAdmin({setShowList, category, setView}) {
   }, [category]);
 
   function handleUpdate(id) {
-    // Handle the update logic, navigate to the update page or display a modal, etc.
-    // For now, let's log a message to the console.
     console.log(`Update product with id: ${id}`);
+    setEditview(true)
+    setIdToUpdate(id)
   }
 
   function handleDelete(id) {
-    // Handle the delete logic, send a request to delete the product, etc.
-    // For now, let's log a message to the console.
-    console.log(`Delete product with id: ${id}`);
+    
+    axios
+      .delete(`http://localhost:5005/products/delete/${id}`)
+      .then((response) => {
+        // setProducts(response.data);
+        setView(category);
+        window.location.reload
+        console.log("product deleted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
     <div>
       <div className="container">
         <div className="back-button">
-          <button onClick={() => {setView(null); setShowList(null)}}>Back</button>
+          <button
+            onClick={() => {
+              setView(null);
+              setShowList(true);
+            }}
+          >
+            Back
+          </button>
         </div>
 
         <div className="card-content">
@@ -49,6 +67,7 @@ function ViewProductAdmin({setShowList, category, setView}) {
                 <button onClick={() => handleUpdate(product._id)}>
                   Update
                 </button>
+
                 <button onClick={() => handleDelete(product._id)}>
                   Delete
                 </button>
@@ -56,9 +75,9 @@ function ViewProductAdmin({setShowList, category, setView}) {
             </div>
           ))}
         </div>
+        {editView && <EditProduct setView={setView} category={category} idToUpdate={idToUpdate}/>}
+
       </div>
     </div>
   );
-}
-
-export default ViewProductAdmin;
+}export default ViewProductAdmin;
