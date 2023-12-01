@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import AddrList from "../components/AddrList";
 import { CartContext } from "./../context/cart.context";
-import NewPayment from "../components/Payment";
+import Payment from "../components/Payment";
+// import CheckoutForm from "../components/CheckoutForm";
 
 function CheckoutPage() {
   const { cart } = useContext(CartContext);
@@ -31,7 +32,8 @@ function CheckoutPage() {
       {/* Add other checkout-related information */}
 
       {addrList && <AddrList />}
-      <NewPayment />
+      <Payment />
+      {/* <CheckoutForm /> */}
       
     </div>
   );

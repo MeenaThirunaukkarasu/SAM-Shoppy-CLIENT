@@ -1,70 +1,42 @@
-import React, { useState, useEffect } from 'react'
-
-let _card
+import { useEffect, useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+import { loadStripe } from "@stripe/stripe-js";
 
 function Payment() {
+  const [stripePromise, setStripePromise] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
 
-    const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    fetch("http://localhost:5005/payment/config").then(async (r) => {
+      const { publishableKey } = await r.json();
+      console.log('publishableKey',publishableKey)
+      console.log('loadStripe(publishableKey)',loadStripe(publishableKey))
+      setStripePromise(loadStripe(publishableKey));
+    });
+  }, []);
 
-    const pay = async () => {
+  useEffect(() => {
+    fetch("http://localhost:5005/payment/create-payment-intent", {
+      method: "POST",
+      body: JSON.stringify({}),
+    }).then(async (result) => {
+      const { clientSecret } = await result.json();
+      console.log('clientSecret',clientSecret)
+      setClientSecret(clientSecret);
+    });
+  }, []);
 
-        try {
-
-            const result = await _card.tokenize();
-            if (result.status === 'OK') {
-                console.log(`Payment token is ${result.token}`);
-                console.log(`Payment Successful`)
-
-                // redirect to a success page
-            } else {
-                let errorMessage = `Tokenization failed with status: ${result.status}`;
-                if (result.errors) {
-                    errorMessage += ` and errors: ${JSON.stringify(
-                        result.errors
-                    )}`;
-                }
-
-                throw new Error(errorMessage);
-            }
-        } catch (e) {
-            console.error(e);
-        }
-
-    }
-
-    const setupPayment = async () => {
-
-      const payments = Square.payments('sandbox-sq0idb-_gtfm7huEf_xA9blXwNY4Q', 'L1AB724TRVQ7A');
-    //   const payments = Square.payments('sandbox-sq0idb-RT3u-HhCpNdbMiGg5aXuVg', 'TC4Z3ZEBKRXRH');
-        _card = await payments.card()
-        await _card.attach('#card-container')
-        setLoading(false)
-
-    }
-
-    useEffect(() => {
-
-        document.getElementById("card-container").innerHTML = ""
-        setupPayment()
-
-        
-
-    }, [])
-
-    return (
-        <div>
-            <h1>Payment Page</h1>
-
-            {loading ? <>Loading...</> : <></>}
-
-            <div id="payment-form">
-                <div id="payment-status-container"></div>
-                <div id="card-container"></div>
-                <button id="card-button" type="button" onClick={pay}>Pay</button>
-            </div>
-
-        </div>
-    )
+  return (
+    <>
+      <h1>React Stripe and the Payment Element</h1>
+      {clientSecret && stripePromise && (
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </>
+  );
 }
 
-export default Payment
+export default Payment;

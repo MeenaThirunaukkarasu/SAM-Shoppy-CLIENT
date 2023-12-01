@@ -17,6 +17,8 @@ import NavBar from './components/NavBar'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import CheckoutPage from './pages/CheckoutPage'
 import UserAccountPage from './pages/UserAccountPage'
+import Payment from "./components/Payment";
+import Completion from "./components/Completion";
 
 function App() {
 
@@ -29,7 +31,7 @@ function App() {
 
    
     <Routes>
-      <Route path="/" element={ <HomePage />} />
+      {/* <Route path="/" element={ <HomePage />} /> */}
       <Route path="/signup" element={<IsAnon><SignUpPage /></IsAnon>} />
       <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
       <Route path="/products" element={<Men />} />
@@ -41,6 +43,10 @@ function App() {
       {/* <Route path="/category" element={ <ViewProductAdmin /> } /> */}
       <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
       <Route path="/checkout" element={ <CheckoutPage /> } />
+      <Route path="/" element={<Payment />} />
+      <Route path="/completion" element={<Completion />} />
+      <Route path="/checkout" element={<checkout />} />
+
 
     </Routes>
     </div>
