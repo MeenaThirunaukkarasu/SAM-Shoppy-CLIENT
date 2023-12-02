@@ -10,6 +10,8 @@ function UserAccountPage(){
     const {  user } = useContext(AuthContext);
     const [formView,setFormView] = useState(false)
     const [address,setAddress] =useState([])
+    const  [pay,setPay] =useState(false)
+
 useEffect(()=>{
 axios.get('http://localhost:5005/address')
 .then(response=>{
@@ -40,7 +42,8 @@ axios.get('http://localhost:5005/address')
                     </div>
                 )
             })}
-            {formView && <AddAddress setFormView={setFormView}/>}
+            {formView && <AddAddress setFormView={setFormView} pay={pay} setPay={setPay}/>}
+
             {/* <Payment /> */}
         </div>
     )

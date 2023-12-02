@@ -1,40 +1,114 @@
 import { AuthContext } from "./../context/auth.context";
 import { useContext, useState, useEffect } from "react";
-import axios from 'axios'
+import { PaymentContext } from "./../context/payment.context";
 
-function AddrList(){
-    const { user } = useContext(AuthContext);
-    const [address,setAddress] =useState([])
+import axios from "axios";
 
+function AddrList({ pay, setPay,setSelectedAddr,selectedAddr }) {
+  const { user } = useContext(AuthContext);
+  const  {updateAddressStatus}=useContext(PaymentContext)
 
-    useEffect(()=>{
-        axios.get('http://localhost:5005/address')
-        .then(response=>{
-            setAddress(response.data)
-        })
-        
-        },[])
-return(
+  const [address, setAddress] = useState([]);
+  const [selectedView, setSelectedView] = useState(null);
+  useEffect(() => {
+    axios.get("http://localhost:5005/address").then((response) => {
+      setAddress(response.data);
+    });
+  }, []);
+  function getSelectedAddr(address) {
+    console.log("Selected Address:", address);
+    updateAddressStatus(address);
+    setSelectedAddr(address);
+    setSelectedView(true);
+  }
+  return (
     <div>
-       <h1> List of  {user.name}'s Addr</h1>
-       <div>
-       {address?.map((address,index)=>{
-                return(
-                    <div key={address._id}>
-                    <p><strong>Address {index+1}</strong></p>
-                    <p><strong>Phone  Number:</strong>{address.contactNumber}</p>
-
-                    {address.address.map(singleaddr=>{
-                        return( <div key={singleaddr.id}><p>{singleaddr.houseNumber} {singleaddr.street} </p>
-                    <p>{singleaddr.city} {singleaddr.postalCode} </p>
-                    <p>{singleaddr.country} </p>
-                    </div>)})}
+      <h1> List of {user.name}'s Addr</h1>
+      <div>
+        {!selectedView ? (
+          pay ? (
+            <div>
+              {address?.map((addressItem, index) => (
+                <div
+                  key={addressItem._id}
+                  onClick={() => {
+                    getSelectedAddr(addressItem);
+                  }}
+                >
+                  <p>
+                    <strong>Address {index + 1}</strong>
+                  </p>
+                  <p>
+                    <strong>Phone Number:</strong>
+                    {addressItem.contactNumber}
+                  </p>
+                  {addressItem.address.map((singleAddr) => (
+                    <div key={singleAddr.id}>
+                      <p>
+                        {singleAddr.houseNumber} {singleAddr.street}
+                      </p>
+                      <p>
+                        {singleAddr.city} {singleAddr.postalCode}
+                      </p>
+                      <p>{singleAddr.country}</p>
                     </div>
-                )
-            })}
+                  ))}
+                </div>
+              ))}
             </div>
+          ) : (
+            <div>
+              {address?.map((addressItem, index) => (
+                <div key={addressItem._id}>
+                  <p>
+                    <strong>Address {index + 1}</strong>
+                  </p>
+                  <p>
+                    <strong>Phone Number:</strong>
+                    {addressItem.contactNumber}
+                  </p>
+                  {addressItem.address.map((singleAddr) => (
+                    <div key={singleAddr.id}>
+                      <p>
+                        {singleAddr.houseNumber} {singleAddr.street}
+                      </p>
+                      <p>
+                        {singleAddr.city} {singleAddr.postalCode}
+                      </p>
+                      <p>{singleAddr.country}</p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )
+        ) : null}
+
+        {selectedView && selectedAddr && (
+          <div key={selectedAddr._id}>
+            <p>
+              <strong>Selected Address </strong>
+            </p>
+            <p>
+              <strong>Phone Number:</strong>
+              {selectedAddr.contactNumber}
+            </p>
+            {selectedAddr.address.map((singleAddr) => (
+              <div key={singleAddr.id}>
+                <p>
+                  {singleAddr.houseNumber} {singleAddr.street}
+                </p>
+                <p>
+                  {singleAddr.city} {singleAddr.postalCode}
+                </p>
+                <p>{singleAddr.country}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
-)
+  );
 }
 
-export default AddrList
+export default AddrList;

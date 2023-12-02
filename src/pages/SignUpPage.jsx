@@ -1,50 +1,104 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Form, Input, Checkbox, Button, message } from 'antd';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
-const API_URL = "http://localhost:5005";
+const API_URL = 'http://localhost:5005';
 
-function SignUpPage() {
-  const [errorMessage, setErrorMessage] = useState(undefined);
-
+const SignUpPage = () => {
   const navigate = useNavigate();
-  function signup(e) {
-    e.preventDefault();
-    const data = {
-      name: e.target.userName.value,
-      email: e.target.email.value,
-      password: e.target.password.value,
-    };
-    console.log(data);
-    axios
-      .post(`${API_URL}/auth/signup`, data)
-      .then((response) => {
-        console.log("signup  done successfully");
-        console.log("signup  done successfully", response.data);
-        navigate("/login");
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
+
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post(`${API_URL}/auth/signup`, {
+        name: values.userName,
+        email: values.email,
+        password: values.password,
       });
-  }
+
+      console.log('Signup done successfully', response.data);
+      message.success('Signup successful! Please proceed to login.');
+      navigate('/login');
+    } catch (error) {
+      const errorDescription = error.response?.data?.message || 'An unexpected error occurred.';
+      message.error(errorDescription);
+    }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
-    <div>
-      <form onSubmit={signup}>
-        <label>Email</label>
-        <input type="text" name="email"></input>
-        <br />
+    <div className="container mw-100 d-flex justify-content-xxl-center align-items-center w-100 vh-100">
+      <Form
+        name="signup"
+        labelCol={{ span: 10 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 1800 }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Email address"
+          name="email"
+          rules={[
+            {
+              required: true,
+              type: 'email',
+              message: 'Please input your email address!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-        <label>User Name</label>
-        <input type="text" name="userName"></input>
-        <br />
+        <Form.Item
+          label="User Name"
+          name="userName"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-        <label>Password</label>
-        <input type="password" name="password"></input>
-        <button type="submit">Sign Up</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{ offset: 8, span: 16 }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
-}
+};
+
 export default SignUpPage;

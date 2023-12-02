@@ -25,6 +25,7 @@ function App() {
   return (
     <div>
     <NavBar />
+    {/* <HomePage />  */}
 
     
      <div className='common-margin'>
@@ -37,13 +38,13 @@ function App() {
       <Route path="/products" element={<Men />} />
       <Route path="/product/:id" element={ <SingleProductPage /> } />
       <Route path="/cart" element={ <CartPage /> } />
-      <Route path="/home" element={ <HomePage /> } />
+      <Route path="/" element={ <HomePage /> } />
       <Route path="/account" element={ <UserAccountPage /> } />
 
       {/* <Route path="/category" element={ <ViewProductAdmin /> } /> */}
       <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
       <Route path="/checkout" element={ <CheckoutPage /> } />
-      <Route path="/" element={<Payment />} />
+      {/* <Route path="/" element={<Payment />} /> */}
       <Route path="/completion" element={<Completion />} />
       <Route path="/checkout" element={<checkout />} />
 

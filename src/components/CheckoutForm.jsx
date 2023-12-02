@@ -1,8 +1,13 @@
 import { PaymentElement } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
+// import { CardElement } from "@stripe/react-stripe-js";
+import { PaymentContext } from "../context/payment.context";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({selectedAddr}) {
+    const  {selectedAddress}=useContext(PaymentContext)
+    console.log('selectedAddress',selectedAddress)
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -20,13 +25,14 @@ export default function CheckoutForm() {
 
     setIsProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
+    const { error,paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: `${window.location.origin}/completion`,
       },
     });
+
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
@@ -35,11 +41,13 @@ export default function CheckoutForm() {
     }
 
     setIsProcessing(false);
+
   };
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
+      {/* <CardElement id="card-element" /> */}
       <button disabled={isProcessing || !stripe || !elements} id="submit">
         <span id="button-text">
           {isProcessing ? "Processing ... " : "Pay now"}

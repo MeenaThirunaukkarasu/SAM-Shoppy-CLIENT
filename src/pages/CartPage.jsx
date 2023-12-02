@@ -61,6 +61,27 @@ function CartPage() {
     );
   };
   useEffect(() => {
+    if (cart) {
+      setGroupedCart(cart.cartDetails || []);
+    }
+  
+    let totalItems = 0;
+    if (cart?.cartDetails) {
+      cart.cartDetails.forEach((cartDetail) => {
+        totalItems += cartDetail.quantity;
+      });
+    }
+    setTotalCartItems(totalItems);
+  
+    // Calculate and store the overall total in localStorage
+    const overallTotal = groupedCart?.reduce(
+      (total, item) => total + calculateItemTotal(item),
+      0
+    );
+    localStorage.setItem("overallTotal", overallTotal.toFixed(2));
+  }, [cart, groupedCart]);
+  
+  useEffect(() => {
     const newExpectedDeliveryDate = new Date(currentDate);
     newExpectedDeliveryDate.setDate(currentDate.getDate() + 2); // Add one day
     setExpectedDeliveryDate(newExpectedDeliveryDate);

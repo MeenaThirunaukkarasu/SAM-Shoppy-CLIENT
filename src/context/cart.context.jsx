@@ -11,21 +11,21 @@ function CartProviderWrapper(props) {
 
   const [cart, setCart] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const refreshCart = () => {
+  const refreshCart =  async () => {
     const storedToken = localStorage.getItem("authToken");
-    axios
+   axios
     .get("http://localhost:5005/cart", {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
     .then((response) => {
-      
       setCart(response.data);
       setIsLoading(false);
+      return response.data;
     });
   };
 
   useEffect(() => {
-    refreshCart();
+   refreshCart();
   }, []);
 
   // Add a function to add a product to the cart
