@@ -23,6 +23,7 @@ function AuthProviderWrapper(props) {
     const logOutUser = () => {                   // <== ADD    
       // To log out the user, remove the token
       removeToken();
+      localStorage.removeItem("user");
 
       // and update the state variables    
       authenticateUser();
@@ -63,8 +64,12 @@ navigate('/')
   }
   
   useEffect(() => {                 //  <==  ADD                                   
-    authenticateUser();  
-  }, []);
+    const checkAuthentication = async () => {
+      await authenticateUser();
+    };
+  
+    checkAuthentication();
+    }, []);
  
 
   return (

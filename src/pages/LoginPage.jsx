@@ -26,7 +26,7 @@ function LoginPage() {
         console.log("JWT token", response.data.authToken);
         // Save the token in the localStorage.
         storeToken(response.data.authToken);
-
+        localStorage.setItem("user",JSON.stringify(response.data.user))
         // Verify the token by sending a request
         // to the server's JWT validation endpoint.
         authenticateUser();

@@ -2,6 +2,7 @@ import { useEffect, useState,useContext } from "react";
 import { useParams, useNavigate  } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "./../context/cart.context";
+import { AuthContext } from "./../context/auth.context";
 
 
 function SingleProductPage() {
@@ -9,9 +10,10 @@ function SingleProductPage() {
   const productId = useParams();
   const navigate = useNavigate();
   const { addProduct } =  useContext(CartContext)
+  const { user } =  useContext(AuthContext)
   const defaultSize= singleProduct.size && singleProduct.size.length > 0 ? singleProduct.size[0] : '';
   const  [size,setSize]=useState()
-  
+  console.log('user',user)
 useEffect(() => {
   setSize(defaultSize);
 }, [defaultSize]);
@@ -62,7 +64,7 @@ useEffect(() => {
             <p className="card-text">Price: ${singleProduct.price}</p>
             <p className="card-text">Availability: {singleProduct.availability}</p>
             {singleProduct.availability>0 ?<p className="card-text" style={{color: "green"}}> InStock</p>:<p className="card-text" style={{color:"red"}}> Out Of Stock</p>}
-            {singleProduct.inStock ? <button onClick={()=>{addProduct(singleProduct._id,size)}}  >Add to Cart</button>: <></>}
+            { user ? singleProduct.inStock ? <button onClick={()=>{addProduct(singleProduct._id,size)}}  >Add to Cart</button>: <></>:<p>Log In to add this product to cart</p>}
          
 
           </div>

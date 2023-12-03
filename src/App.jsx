@@ -19,7 +19,7 @@ import CheckoutPage from './pages/CheckoutPage'
 import UserAccountPage from './pages/UserAccountPage'
 import Payment from "./components/Payment";
 import Completion from "./components/Completion";
-
+import MyOrders from './pages/MyOrders'
 function App() {
 
   return (
@@ -37,9 +37,9 @@ function App() {
       <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
       <Route path="/products" element={<Men />} />
       <Route path="/product/:id" element={ <SingleProductPage /> } />
-      <Route path="/cart" element={ <CartPage /> } />
+      <Route path="/cart" element={ <IsPrivate><CartPage /></IsPrivate>  } />
       <Route path="/" element={ <HomePage /> } />
-      <Route path="/account" element={ <UserAccountPage /> } />
+      <Route path="/account" element={ <IsPrivate><UserAccountPage /></IsPrivate> } />
 
       {/* <Route path="/category" element={ <ViewProductAdmin /> } /> */}
       <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
@@ -47,6 +47,7 @@ function App() {
       {/* <Route path="/" element={<Payment />} /> */}
       <Route path="/completion" element={<Completion />} />
       <Route path="/checkout" element={<checkout />} />
+      <Route path="/myorders" element={ <IsPrivate><MyOrders /></IsPrivate>} />
 
 
     </Routes>

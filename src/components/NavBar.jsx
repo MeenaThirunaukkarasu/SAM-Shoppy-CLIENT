@@ -1,6 +1,5 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState,useContext } from 'react'
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { CartContext } from "../context/cart.context";
 function NavBar() {
@@ -59,7 +58,7 @@ function NavBar() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
-          <Link to="/home" className="nav-link active" aria-current="page">Home</Link>
+          <Link to="/" className="nav-link active" aria-current="page">Home</Link>
            
           </li>
           {user?.role==='admin'&& (<>
@@ -68,7 +67,12 @@ function NavBar() {
             <Link className="nav-link" to="/admin">products</Link>
         
           </li>
+        
           </>)}
+          {user && <li className="nav-item dropdown">
+          <p className="nav-link">{user.name} ({user.role})</p>
+
+          </li>}
           <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" to="/categories" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
@@ -87,6 +91,7 @@ function NavBar() {
                   <li>
                     <Link to='/products' state={{category:'girls'}} className="dropdown-item" >Girls</Link>
                   </li>
+
             </ul>
           </li>
         </ul>
@@ -123,7 +128,7 @@ function NavBar() {
               ):(
 
                 <>
-                <li><Link className="dropdown-item" to='/account'><i className="fas fa-sliders-h fa-fw"></i> Account</Link></li>
+                <li><Link className="dropdown-item" to='/account'><i className="fas fa-sliders-h fa-fw"></i> {user.name}'s Account</Link></li>
               <li><Link className="dropdown-item" href="#"><i className="fas fa-cog fa-fw"></i> Settings</Link></li>
               <li><Link className="dropdown-item" to="/myorders"><i className="fas fa-cog fa-fw"></i> My Orders</Link></li>
               

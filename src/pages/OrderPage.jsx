@@ -260,4 +260,4 @@ function OrderPage() {
   );
 }
 
-export default CartPage;
+export default OrderPage;

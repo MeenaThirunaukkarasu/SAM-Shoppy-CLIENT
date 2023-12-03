@@ -10,8 +10,9 @@ e.preventDefault()
 console.log('function called')
 
 const addrDetails={
-  contactNumber:e.target.contactNumber.value,
+  user:user._id,
   address:{
+    contactNumber:e.target.contactNumber.value,
     houseNumber:e.target.houseNumber.value,
     street:e.target.street.value,
     city:e.target.city.value,

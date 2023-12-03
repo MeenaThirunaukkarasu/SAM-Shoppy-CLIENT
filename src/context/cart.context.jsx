@@ -20,6 +20,7 @@ function CartProviderWrapper(props) {
     .then((response) => {
       setCart(response.data);
       setIsLoading(false);
+      localStorage.setItem("cart",JSON.stringify(response.data))
       return response.data;
     });
   };
