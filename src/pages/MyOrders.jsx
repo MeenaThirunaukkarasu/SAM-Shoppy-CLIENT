@@ -67,9 +67,9 @@ console.log('filteredAddr',filteredAddr)
     <p>Order Id:{order._id}</p>
     <p>Order Placed On:{convertDateFormat(order.createdAt)}</p>
     <p>Total:${order.totalAmount}</p>
-    <p>Delivered To:{filteredAddr[0]?.houseNumber} {filteredAddr[0]?.street} </p>
+    {/* <p>Delivered To:{filteredAddr[0]?.houseNumber} {filteredAddr[0]?.street} </p>
     <p>{filteredAddr[0]?.postalCode} {filteredAddr[0]?.city} </p>
-    <p>{filteredAddr[0]?.country} </p>
+    <p>{filteredAddr[0]?.country} </p> */}
     <p>Order Status :{order.status}</p>
    {order.cartDetails.map((cart,index)=>{
     return(

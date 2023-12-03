@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import EditProduct from './EditProduct'
+import EditProduct from "./EditProduct";
 
-function ViewProductAdmin({ setShowList, category, setView ,view}) {
+function ViewProductAdmin({ setShowList, category, setView, view }) {
   const [products, setProducts] = useState([]);
-const [editView,setEditview]=useState(null)
-const [idToUpdate,setIdToUpdate] = useState(null)
+  const [editView, setEditview] = useState(null);
+  const [idToUpdate, setIdToUpdate] = useState(null);
   useEffect(() => {
     // Fetch products based on the provided category (e.g., men, women, boys, girls)
     axios
@@ -20,18 +20,18 @@ const [idToUpdate,setIdToUpdate] = useState(null)
 
   function handleUpdate(id) {
     console.log(`Update product with id: ${id}`);
-    setEditview(true)
-    setIdToUpdate(id)
+    setEditview(true);
+    setIdToUpdate(id);
+    setView(null)
   }
 
   function handleDelete(id) {
-    
     axios
       .delete(`http://localhost:5005/products/delete/${id}`)
       .then((response) => {
         // setProducts(response.data);
         setView(category);
-        window.location.reload
+        window.location.reload();
         console.log("product deleted");
       })
       .catch((error) => {
@@ -43,14 +43,14 @@ const [idToUpdate,setIdToUpdate] = useState(null)
     <div>
       <div className="container">
         <div className="back-button">
-          <button
+          {  view !=='create product' && <button
             onClick={() => {
               setView(null);
               setShowList(true);
             }}
           >
             Back
-          </button>
+          </button>}
         </div>
 
         <div className="card-content">
@@ -75,9 +75,16 @@ const [idToUpdate,setIdToUpdate] = useState(null)
             </div>
           ))}
         </div>
-        {editView && <EditProduct setView={setView} category={category} idToUpdate={idToUpdate}/>}
-
       </div>
+      { editView && (
+          <EditProduct
+            setView={setView}
+            setEditview={setEditview}
+            category={category}
+            idToUpdate={idToUpdate}
+          />
+        )}
     </div>
   );
-}export default ViewProductAdmin;
+}
+export default ViewProductAdmin;

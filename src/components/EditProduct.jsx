@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-function EditProduct({ idToUpdate, category, setView }) {
+function EditProduct({ idToUpdate, category, setView,setEditview }) {
   const [productToUpdate, setProductToUpdate] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5005/products/${idToUpdate}`)
-      .then((response) => {
-        setProductToUpdate(response.data);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:5005/products/${idToUpdate}`)
+  //     .then((response) => {
+  //       setProductToUpdate(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("error", error);
+  //     });
+  // }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    // setEditedProduct({ ...editedProduct, [name]: value });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   // setEditedProduct({ ...editedProduct, [name]: value });
+  // };
 
-  const handleSave = () => {
-    // onSave(productId, editedProduct);
-  };
+  // const handleSave = () => {
+  //   // onSave(productId, editedProduct);
+  // };
 
-  const handleCancel = () => {
-    // onCancel();
-    setView(category)
-  };
+  // const handleCancel = () => {
+  //   // onCancel();
+  //   setView(category)
+  // };
 
   return (
     <div>
@@ -50,7 +50,6 @@ function EditProduct({ idToUpdate, category, setView }) {
             id="title"
             name="title"
             // value={editedProduct.title || ""}
-            onChange={handleInputChange}
           />
         </div>
         <div>
@@ -59,7 +58,6 @@ function EditProduct({ idToUpdate, category, setView }) {
             id="desc"
             name="desc"
             // value={editedProduct.desc || ""}
-            onChange={handleInputChange}
           />
         </div>
         <div>
@@ -69,7 +67,6 @@ function EditProduct({ idToUpdate, category, setView }) {
             id="categories"
             name="categories"
             // value={editedProduct.categories || ""}
-            onChange={handleInputChange}
           />
         </div>
         <div>
@@ -79,7 +76,6 @@ function EditProduct({ idToUpdate, category, setView }) {
             id="availability"
             name="availability"
             // value={editedProduct.availability || ""}
-            onChange={handleInputChange}
           />
         </div>
         <div>
@@ -89,7 +85,6 @@ function EditProduct({ idToUpdate, category, setView }) {
             id="price"
             name="price"
             // value={editedProduct.price || ""}
-            onChange={handleInputChange}
             required
           />
         </div>
@@ -100,16 +95,15 @@ function EditProduct({ idToUpdate, category, setView }) {
             id="stock"
             name="stock"
             // value={editedProduct.stock || ""}
-            onChange={handleInputChange}
             required
           />
         </div>
 
         {/* Add other editable fields as needed */}
-        <button type="button" onClick={handleSave}>
+        <button type="button" >
           Save
         </button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" >
           Cancel
         </button>
       </form>
