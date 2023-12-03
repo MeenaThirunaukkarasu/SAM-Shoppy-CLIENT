@@ -13,6 +13,7 @@ function Completion() {
   const [redirectStatus, setRedirectStatus] = useState(null);
   const [deliveryAddress, setDeliveryAddress] = useState();
   const [overallTotal, setOverallTotal] = useState(null);
+  const [orderId, setOrderId] = useState(null);
   const { search } = useLocation();
 
   
@@ -36,9 +37,10 @@ function Completion() {
 
   useEffect(  () => {
     axios
-    .post(`http://localhost:5005/order/create`, { cart, user, overallTotal })
+    .post(`http://localhost:5005/order/create`, { cart, user, overallTotal, deliveryAddress })
     .then((response) => {
       console.log(response.data);
+      setOrderId(response.data._id);
     })
     .catch((error) => {
       console.log("error", error);
@@ -61,7 +63,8 @@ function Completion() {
 
       {redirectStatus === "succeeded" ? (
         <div>
-          <h1>Thank you! 🎉</h1>
+          <h1>Thank you for  the payment! 🎉</h1>
+          <p>Your order is been placed . OrderId for reference : {orderId} 🎉</p>
           <button type="submit">
             View Orders
           </button>
