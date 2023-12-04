@@ -73,12 +73,19 @@ console.log('filteredAddr',filteredAddr)
     <p>Order Status :{order.status}</p>
    {order.cartDetails.map((cart,index)=>{
     return(
-      <div key={index} onClick={()=>{singleProduct(cart.product._id) }}>
-      <img  src={cart.product.img} alt='error' />
-      <p>{cart.product.title}</p>
-      <p>Quantity : {cart.quantity}</p>
+      <div key={index} onClick={()=>{singleProduct(cart.product._id) }} className="col-10 mx-auto border p-1 d-flex justify-content-center align-items-center">
+      <div  className="row col-12">
+      <div className="col-1  d-flex flex-column justify-content-center align-items-center" >
+      <img  className="w-100" src={cart.product.img} alt='error' />
+      </div>
+      <div className="col-10 d-flex flex-column justify-content-center align-items-center">
+      <h5 className="cap">{cart.product.title}</h5>
+      <p><strong>Quantity :</strong> {cart.quantity}</p>
       <p>Return period expires on {add30DaysAndFormat(order.createdAt)}</p>
       </div>
+     
+      </div>
+      </div>  
     )
    })}
    <hr />

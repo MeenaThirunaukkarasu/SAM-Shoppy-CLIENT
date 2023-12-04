@@ -95,28 +95,26 @@ function NavBar() {
             </ul>
           </li>
         </ul>
-        <form className="d-flex" role="search">
+        {/* <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
-        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu"> 
-          <li className="nav-item dropdown">
+      </form> */}
+        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 col-2 profile-menu"> 
+          <li className="nav-item dropdown w-100">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {isLoggedIn ? (
                 <>
-              <div className="profile-pic">
-                  <img src="/account-logo.png" alt="Profile Picture"/>
+              <div className="profile-pic ">
+              <i className="bi bi-person-circle"></i>
                   <span className="user">{user && user.name}</span>
                </div>
                </>
             ):(
                 <div className="profile-pic not-login">
-                  <img src="/account-logo.png" alt="Profile Picture"/>
+                <i className="bi bi-person-circle"></i>
                   <span className="user">Guest</span>
                </div>
             )}
-{/*          
-             <!--  <i className="fas fa-user"></i> --> */}
             </a>
             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
               

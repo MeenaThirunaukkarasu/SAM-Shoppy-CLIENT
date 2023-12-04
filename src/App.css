@@ -15,6 +15,7 @@ width: 100%;
 }
 .common-margin{
   padding:10px 0;
+  margin-top: 90px;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -90,36 +91,13 @@ width: 100%;
   transition: filter 300ms;
   /* background: none; */
 } 
-.user{
-  margin-left: 600px;
-}
-/* .product-img{
-  height: 80%;
-  width:80%;
-  margin: auto;
-} */
-/* .card-content{
-  width: 20%;
-  margin: 10px auto 10px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 
-} */
+
 .card-details {
   margin-bottom: 15px; 
-  padding: 2em;
+  padding: 5%;
 }
-/* .container {
-  max-width: 1200px; 
-  margin: 0 auto; 
-} */
-/* .product-container {
-  display: flex;
-  justify-content: space-between;
-  max-width: 1000%; 
-  margin: 0 auto; 
-} */
+
 .product-details .card{
   margin-top: 4.7rem;
 }
@@ -146,37 +124,24 @@ gap: 10px;
 }
 .count-number{
 border: 1px solid  black;
-/* padding: 20px; */
 }
 
 
 
 /* NavBar Css starts */
 /* Profile Picture */
-.profile-pic{
-  display: inline-block;
-  vertical-align: middle;
-   width: 50px;
-   height: 50px;
-   overflow: hidden;
-  border-radius: 50%;
-}
-.profile-pic img{
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-.profile-menu .dropdown-menu {
- right: 0;
- left: unset;
-}
-.profile-menu .fa-fw {
- margin-right: 10px;
+.profile-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
 }
 
-.toggle-change::after {
- border-top: 0;
- border-bottom: 0.3em solid;
+.bi.bi-person-circle{
+  font-size: 2rem;margin-right:10px
 }
-
-/* NavBar Css Ends */
+.profile-menu .dropdown-toggle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
