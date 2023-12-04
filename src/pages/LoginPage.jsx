@@ -10,6 +10,8 @@ function LoginPage() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(undefined);
   const { storeToken, authenticateUser } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+
   const { refreshCart } = useContext(CartContext);
   
   function login(e) {
@@ -40,15 +42,43 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <form onSubmit={login}>
-        <label>User Name</label>
-        <input type="text" name="userName"></input>
-        <br />
+    <div className="signup d-flex justify-content-center align-items-center row ">
+      <form className="bg-base p-3 col-10  col-sm-6  col-md-6 col-lg-5 col-xl-5 col-xxl-4 rounded  " onSubmit={login}>
+      <h2 className="mb-5" >Login your Account</h2>
+      <div className="form-group  mt-3">
+    <label htmlFor="exampleInputusername" className="d-flex  text-left  mb-1" >User Name</label>
+   
+    <input type="text" className="form-control" name="userName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Enter your Name "/>
+  </div>
 
-        <label>Password</label>
-        <input type="password" name="password"></input>
-        <button type="submit">Log In</button>
+  <div className="form-group  mt-3"  >
+        <label htmlFor="password" className="d-flex text-left mb-1">
+          Password
+        </label>
+        <div className="position-relative">
+        <input
+        id="exampleInputPassword1" 
+          type={showPassword ? "text" : "password"}
+          name="password"
+          className="form-control"
+          required
+          placeholder="Password"
+        />
+       <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="position-absolute p-1 eye-button bg-light"
+          >
+            {showPassword ? (
+              
+              <i className="bi bi-eye text-dark"></i>
+            ) : (
+              <i className="bi bi-eye-slash text-dark"></i>
+            )}
+          </button>
+          </div>
+      </div>
+      <button type="submit" className="btn btn-blue mt-4">Sign Up</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>

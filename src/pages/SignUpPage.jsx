@@ -6,7 +6,7 @@ const API_URL = "http://localhost:5005";
 
 function SignUpPage() {
   const [errorMessage, setErrorMessage] = useState(undefined);
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   function signup(e) {
     e.preventDefault();
@@ -29,40 +29,60 @@ function SignUpPage() {
       });
   }
   return (
-    <div className="signup d-flex justify-content-center align-items-center ">
+    <div className="signup d-flex justify-content-center align-items-center row ">
 
-      <form onSubmit={signup}>
-      <h2>Sign up your Account</h2>
-      <div className="form-group row  mt-4">
+      <form className="bg-base p-3 col-10  col-sm-6  col-md-6 col-lg-5 col-xl-5 col-xxl-4 rounded  " onSubmit={signup}>
+      <h2 className="mb-5" >Sign up your Account</h2>
+      <div className="form-group">
 
-    <label htmlFor="exampleInputEmail1 " className="col-sm-2 col-form-label">Email address</label>
-     <div className="col-sm-10">
-     <input type="email" className="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+    <label htmlFor="exampleInputEmail1" className="d-flex text-left  mb-1">Email address</label>
+     <input type="email" className="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Email"/>
   </div>
-  </div>
-  <div className="form-group row mt-4">
-    <label htmlFor="exampleInputusername" className="col-sm-2 col-form-label">User Name</label>
-    <div className="col-sm-10">
-    <input type="text" className="form-control" name="userName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-  </div>
+  <div className="form-group  mt-3">
+    <label htmlFor="exampleInputusername" className="d-flex  text-left  mb-1" >User Name</label>
+   
+    <input type="text" className="form-control" name="userName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Enter your Name "/>
   </div>
        
-      
-        <div className="form-group row mt-4">
-    <label htmlFor="exampleInputPassword1" className="col-sm-2 col-form-label" >Password</label>
-    <div className="col-sm-10">
+{/*       
+   <div className="form-group  mt-3"  >
+    <label htmlFor="exampleInputPassword1" className="d-flex text-left mb-1">Password</label>
     <input type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
- </div>
-  </div>
+  </div> */}
+  <div className="form-group  mt-3"  >
+        <label htmlFor="password" className="d-flex text-left mb-1">
+          Password
+        </label>
+        <div className="position-relative">
+        <input
+        id="exampleInputPassword1" 
+          type={showPassword ? "text" : "password"}
+          name="password"
+          className="form-control"
+          required
+          placeholder="Password"
+        />
+       <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="position-absolute p-1 eye-button bg-light"
+          >
+            {showPassword ? (
+              
+              <i className="bi bi-eye text-dark"></i>
+            ) : (
+              <i className="bi bi-eye-slash text-dark"></i>
+            )}
+          </button>
+          </div>
+      </div>
 
 
 
-        <button type="submit" className="btn btn-primary mt-5">Sign Up</button>
+        <button type="submit" className="btn btn-blue mt-4">Sign Up</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }
 export default SignUpPage;
-
-    
