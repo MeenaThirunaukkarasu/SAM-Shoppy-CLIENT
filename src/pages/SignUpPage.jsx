@@ -1,104 +1,68 @@
-import React from 'react';
-import { Form, Input, Checkbox, Button, message } from 'antd';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-const API_URL = 'http://localhost:5005';
+const API_URL = "http://localhost:5005";
 
-const SignUpPage = () => {
+function SignUpPage() {
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const navigate = useNavigate();
-
-  const onFinish = async (values) => {
-    try {
-      const response = await axios.post(`${API_URL}/auth/signup`, {
-        name: values.userName,
-        email: values.email,
-        password: values.password,
+  function signup(e) {
+    e.preventDefault();
+    const data = {
+      name: e.target.userName.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+    console.log(data);
+    axios
+      .post(`${API_URL}/auth/signup`, data)
+      .then((response) => {
+        console.log("signup  done successfully");
+        console.log("signup  done successfully", response.data);
+        navigate("/login");
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
       });
-
-      console.log('Signup done successfully', response.data);
-      message.success('Signup successful! Please proceed to login.');
-      navigate('/login');
-    } catch (error) {
-      const errorDescription = error.response?.data?.message || 'An unexpected error occurred.';
-      message.error(errorDescription);
-    }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
+  }
   return (
-    <div className="container mw-100 d-flex justify-content-xxl-center align-items-center w-100 vh-100">
-      <Form
-        name="signup"
-        labelCol={{ span: 10 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 1800 }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Email address"
-          name="email"
-          rules={[
-            {
-              required: true,
-              type: 'email',
-              message: 'Please input your email address!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+    <div className="signup d-flex justify-content-center align-items-center ">
 
-        <Form.Item
-          label="User Name"
-          name="userName"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your username!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+      <form onSubmit={signup}>
+      <h2>Sign up your Account</h2>
+      <div className="form-group row  mt-4">
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
+    <label htmlFor="exampleInputEmail1 " className="col-sm-2 col-form-label">Email address</label>
+     <div className="col-sm-10">
+     <input type="email" className="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+  </div>
+  </div>
+  <div className="form-group row mt-4">
+    <label htmlFor="exampleInputusername" className="col-sm-2 col-form-label">User Name</label>
+    <div className="col-sm-10">
+    <input type="text" className="form-control" name="userName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+  </div>
+  </div>
+       
+      
+        <div className="form-group row mt-4">
+    <label htmlFor="exampleInputPassword1" className="col-sm-2 col-form-label" >Password</label>
+    <div className="col-sm-10">
+    <input type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+ </div>
+  </div>
 
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+
+        <button type="submit" className="btn btn-primary mt-5">Sign Up</button>
+      </form>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
-};
-
+}
 export default SignUpPage;
+
+    
