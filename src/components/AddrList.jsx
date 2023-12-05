@@ -26,13 +26,13 @@ function AddrList({ pay, setPay, setSelectedAddr, selectedAddr, setShowAddr }) {
   return (
     <div>
       {/* <h1> List of {user.name}'s Addr</h1> */}
-      <div>
+      <div className="" >
         {!selectedView ? (
           pay ? (
-            <div>
+            <div >
               {address?.address?.map((singleaddr) => {
                 return (
-                  <div
+                  <div  className="bg-light-orange p-2 m-2 rounded text-start border-light-orange" 
                     key={singleaddr.id}
                     onClick={() => {
                       getSelectedAddr(singleaddr);
@@ -43,21 +43,31 @@ function AddrList({ pay, setPay, setSelectedAddr, selectedAddr, setShowAddr }) {
                       {singleaddr.contactNumber}
                     </p>
                     <p>
+                    <strong>Address:</strong>
+                    <ul className="list-group">
+                      <li className="" >
                       {singleaddr.houseNumber} {singleaddr.street}{" "}
-                    </p>
-                    <p>
+
+                      </li>
+                      <li className="">
                       {singleaddr.city} {singleaddr.postalCode}{" "}
-                    </p>
-                    <p>{singleaddr.country} </p>
+
+                          </li>
+                          <li className="">
+                          {singleaddr.country}
+                          </li>
+                    </ul>
+                     </p>
                   </div>
                 );
               })}
             </div>
           ) : (
             <div>
-            <button onClick={()=>{setShowAddr(false)}}>Back</button>
+
+            <button  className="position-absolute btn bg-base-orange text-white  back-btn" onClick={()=>{setShowAddr(false)}}><i className="bi bi-chevron-double-left"></i></button>
               {address?.address?.map((singleaddr, index) => (
-                <div key={singleaddr._id}>
+                <div key={singleaddr._id} className="bg-light-orange p-3 m-2 rounded text-start border-light-orange text-blue">
                   <p>
                     <strong>Address {index + 1}</strong>
                   </p>
@@ -80,14 +90,14 @@ function AddrList({ pay, setPay, setSelectedAddr, selectedAddr, setShowAddr }) {
         ) : null}
 
         {selectedView && selectedAddr && (
-          <div key={selectedAddr._id}>
+          <div key={selectedAddr._id}  className="bg-light-orange p-2 m-2 mb-4 rounded text-start border-light-orange" >
             <p>
               <strong>Selected Address </strong>
             </p>
-            {/* <p>
+            <p>
               <strong>Phone Number:</strong>
               {selectedAddr.contactNumber}
-            </p> */}
+            </p>
             {/* {selectedAddr.address.map((singleAddr) => ( */}
             <div>
               <p>

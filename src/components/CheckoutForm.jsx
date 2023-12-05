@@ -48,8 +48,8 @@ export default function CheckoutForm({selectedAddr}) {
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
       {/* <CardElement id="card-element" /> */}
-      <button disabled={isProcessing || !stripe || !elements} id="submit">
-        <span id="button-text">
+      <button disabled={isProcessing || !stripe || !elements} id="submit" className="btn bg-base-orange  m-3  text-white">
+        <span id="button-text" >
           {isProcessing ? "Processing ... " : "Pay now"}
         </span>
       </button>

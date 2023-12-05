@@ -45,7 +45,7 @@ function NavBar() {
   
 
   return (
-    <div><nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div><nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-blue">
     <div className="container">
       <a className="navbar-brand" href="#"> <img
             src="/logo.png"
@@ -56,9 +56,9 @@ function NavBar() {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
           <li className="nav-item">
-          <Link to="/" className="nav-link active" aria-current="page">Home</Link>
+          <Link to="/" className="nav-link  active" aria-current="page">Home</Link>
            
           </li>
           {user?.role==='admin'&& (<>
@@ -140,11 +140,11 @@ function NavBar() {
           </li>
        </ul>
        
-       <button>
+
        <Link to="/cart" className="nav-link">
                     <i className="bi bi-bag-fill"></i> {totalCartItems} items
                     </Link>
-                    </button>
+               
       </div>
     </div>
   </nav>

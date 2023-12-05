@@ -28,11 +28,16 @@ function UserAccountPage() {
     setShowAddr(true)
   }
   return (
-    <div>
-      <h1> {user?.name}'s AccountPage</h1>
-      <button onClick={showAddrForm}>Add Address</button>
-      <button onClick={showAddress}>View Addressess</button>
-      <h4>Addressess</h4>
+    <div className="container  position-relative">
+    <div className=" d-flex justify-content-center align-items-center  row col-11 mx-auto ">
+
+  <div className=" border-light-green rounded  col-7 p-3 ">
+      <h3  className="text-green text-capitalize  m-2"> {user?.name}'s AccountPage</h3>
+      <div className=" d-flex justify-content-between align-items-center ">
+      <button className="btn bg-base-orange text-white " onClick={showAddrForm}>Add Address</button>
+      <button className="btn bg-base-orange text-white mx-2" onClick={showAddress}>View Addressess</button>
+      </div>
+      <h5 className="text-green text-capitalize  m-3 text-start" >Address List</h5>
       {showAddr && <AddrList setShowAddr={setShowAddr}/>}
       {/* {addresses?.address?.map((singleaddr) => {
         return (
@@ -57,6 +62,8 @@ function UserAccountPage() {
       )}
 
       {/* <Payment /> */}
+      </div>
+    </div>
     </div>
   );
 }

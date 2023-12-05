@@ -27,12 +27,14 @@ function Payment({selectedAddr}) {
 
   return (
     <>
-      <h1>React Stripe and the Payment Element</h1>
+    <div className="p-2 ">
+     <h5 className="m-2  p-2 text-capitilize text-green  ">Summary</h5>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm clientSecret={clientSecret} selectedAddr={selectedAddr}/>
         </Elements>
       )}
+      </div>
     </>
   );
 }

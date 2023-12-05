@@ -18,6 +18,7 @@ const addrDetails={
     city:e.target.city.value,
     postalCode:e.target.postalCode.value,
     country:e.target.country.value,
+    email:e.target.email.value,
 }
 }
 console.log('addrDetails',addrDetails)
@@ -33,48 +34,57 @@ function goBack(){
     setFormView(false)
 }
     return(
-        <div>
-        <button onClick={goBack}>Go Back</button>
-            <form onSubmit={addAddr}>
-            
-        <input
+      <div className=" d-flex justify-content-center align-items-center row ">
+      <button  onClick={goBack} className="w-auto btn bg-base-orange text-white  back-btn" ><i className="bi bi-chevron-double-left"></i></button>
+
+
+            <form className="bg-light-orange border-light-orange p-3 col-11 "  onSubmit={addAddr}>
+            <h5 className="mb-2  text-green text-capitalize" >Add address</h5>
+            <input className="form-control"
+          type="text"
+          name="email"
+          placeholder="Enter your email"
+          />
+          <br/>
+        <input className="form-control"
           type="text"
           name="contactNumber"
           placeholder="Enter your contact number"
         />
         <br />
-        <input
+        <input className="form-control"
           type="text"
           name="houseNumber"
           placeholder="Enter your house number"
         />
         <br/>
-        <input
+        <input className="form-control"
           type="text"
           name="street"
           placeholder="Enter your street name"
         />
         <br />
-        <input
+        <input className="form-control"
           type="text"
           name="postalCode"
           placeholder="Enter your post code"
         />
         <br />
-        <input
+        <input className="form-control"
           type="text"
           name="city"
           placeholder="Enter your city"
         />
         <br />
-        <input
+        <input className="form-control"
           type="text"
           name="country"
           placeholder="Enter your country"
           />
           <br/>
+        
 
-                <button type='submit'>Add Address</button>
+                <button type='submit'  className='btn text-white bg-base-orange'>Add Address</button>
             </form>
         </div>
     )

@@ -27,18 +27,28 @@ function CheckoutPage() {
     setTotalCartItems(totalItems);
   }, [cart]);
   return (
-    <div>
-      <h2>Checkout Page</h2>
+    <div className="container ">
+    <div className="row d-flex col-11  justify-content-center align-items-start my-4">
+    <h3 className="mb-3 text-green " >Checkout Page</h3>
       {/* Render checkout form or other checkout-related elements */}
-      <p>Total Items in Cart: {totalCartItems}</p>
-      <button onClick={()=>{setAddrList(true); setPay(true)} }>Select Address</button>
+      <div className="card mb-4 col-7 py-3 border-light-green text-blue">
+
+      <p  className="text-blue mb-5 fw-semibold">Total Items in Cart: {totalCartItems}</p>
+      <div className="d-flex justify-content-around">
+      <button className="btn bg-base-orange  text-white " onClick={()=>{setAddrList(true); setPay(true)} }>Select Address</button>
       {/* Add other checkout-related information */}
 
-      {addrList && <AddrList pay={pay} setPay={setPay} setSelectedAddr={setSelectedAddr} selectedAddr={selectedAddr}/>}
-      <button onClick={()=>{setPaymentView(true)}}>Pay</button>
 
+      </div>
+      <div className="mt-4">
+      {addrList && <AddrList pay={pay} setPay={setPay} setSelectedAddr={setSelectedAddr} selectedAddr={selectedAddr}/>}
+      <button className="btn bg-base-orange  text-white " onClick={()=>{setPaymentView(true)}}>Pay</button>
+
+</div>
      {paymentView && <Payment selectedAddr={selectedAddr}/>}
-      
+
+      </div>
+    </div>
     </div>
   );
 }

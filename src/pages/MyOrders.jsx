@@ -52,35 +52,39 @@ function add30DaysAndFormat(date) {
   return formattedNewDate;
 }
 console.log('address',address)
-  return <div>
-  <h1>My Order List</h1>
+  return     <div className="container  position-relative">
+    <div className=" d-flex justify-content-center align-items-center  row col-11 mx-auto ">
+
+<div className=" border-light-green rounded  col-11 p-3 ">
+<h3  className="text-green text-capitalize  m-2">My Order List</h3>
+
+
   {myOrders?.map((order,index)=>{
     const filteredAddr=address?.address?.filter(address=>{
   return address._id===order.deliveryAddress
 })
 console.log('filteredAddr',filteredAddr)
     return(
-      <div key={order._id}>
-      <hr />
+      <div key={order._id} className="bg-light-orange p-3 m-2 rounded text-start border-light-orange text-blue">
 
-    <h2>Order No:{index+1}</h2>
-    <p>Order Id:{order._id}</p>
-    <p>Order Placed On:{convertDateFormat(order.createdAt)}</p>
-    <p>Total:${order.totalAmount}</p>
+    <h2><strong>Order No: </strong>{index+1}</h2>
+    <p><strong>Order Id: </strong> {order._id}</p>
+    <p><strong>Order Placed On: </strong>{convertDateFormat(order.createdAt)}</p>
+    <p><strong>Total:</strong> ${order.totalAmount}</p>
     {/* <p>Delivered To:{filteredAddr[0]?.houseNumber} {filteredAddr[0]?.street} </p>
     <p>{filteredAddr[0]?.postalCode} {filteredAddr[0]?.city} </p>
     <p>{filteredAddr[0]?.country} </p> */}
-    <p>Order Status :{order.status}</p>
+    <p><strong>Order Status :</strong>{order.status}</p>
    {order.cartDetails.map((cart,index)=>{
     return(
-      <div key={index} onClick={()=>{singleProduct(cart.product._id) }} className="col-10 mx-auto border p-1 d-flex justify-content-center align-items-center">
-      <div  className="row col-12">
-      <div className="col-1  d-flex flex-column justify-content-center align-items-center" >
+      <div key={index} onClick={()=>{singleProduct(cart.product._id) }} className="col-11 mx-auto border-bottom p-2 d-flex justify-content-center align-items-center">
+      <div  className="row col-12 ">
+      <div className="col-4 col-md-2  d-flex flex-column justify-content-center align-items-center  " >
       <img  className="w-100" src={cart.product.img} alt='error' />
       </div>
-      <div className="col-10 d-flex flex-column justify-content-center align-items-center">
-      <h5 className="cap">{cart.product.title}</h5>
-      <p><strong>Quantity :</strong> {cart.quantity}</p>
+      <div className="col-8  text-start w-100% ">
+      <h5 className="text-capitilize text-green fs-6 fw-normal">{cart.product.title}</h5>
+      <p>Quantity : {cart.quantity}</p>
       <p>Return period expires on {add30DaysAndFormat(order.createdAt)}</p>
       </div>
      
@@ -88,12 +92,13 @@ console.log('filteredAddr',filteredAddr)
       </div>  
     )
    })}
-   <hr />
 
     </div>
     )
   })}
-  </div>;
+  </div>
+  </div>
+  </div>
 }
 
 export default MyOrders;
