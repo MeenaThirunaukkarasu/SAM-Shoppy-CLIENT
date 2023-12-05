@@ -69,10 +69,10 @@ function NavBar() {
           </li>
         
           </>)}
-          {user && <li className="nav-item dropdown">
+          {/* {user && <li className="nav-item dropdown">
           <p className="nav-link">{user.name} ({user.role})</p>
 
-          </li>}
+          </li>} */}
           <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" to="/categories" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
