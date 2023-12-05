@@ -6,7 +6,7 @@ function HomePage(){
     const navigate = useNavigate();
 const [products,setProducts] = useState(null)
 useEffect(()=>{
-axios.get('http://localhost:5005/products')
+axios.get(`${import.meta.env.VITE_BASE_URL_API}/products`)
 .then(response=>{
 setProducts(response.data)
 })

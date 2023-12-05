@@ -14,7 +14,7 @@ function CartProviderWrapper(props) {
   const refreshCart =  async () => {
     const storedToken = localStorage.getItem("authToken");
    axios
-    .get("http://localhost:5005/cart", {
+    .get(`${import.meta.env.VITE_BASE_URL_API}/cart`, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
     .then((response) => {
@@ -45,7 +45,7 @@ function CartProviderWrapper(props) {
     console.log(cartDetails)
     axios
       .post(
-        "http://localhost:5005/cart/add",
+        `${import.meta.env.VITE_BASE_URL_API}/cart/add`,
         {cartDetails},
         { headers: { Authorization: `Bearer ${storedToken}` } }
       )
@@ -69,7 +69,7 @@ function CartProviderWrapper(props) {
       navigate("/login");
       return;
     }
-    axios.delete(`http://localhost:5005/cart/delete/${productId}?size=${size}`, {
+    axios.delete(`${import.meta.env.VITE_BASE_URL_API}/cart/delete/${productId}?size=${size}`, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
     // rest of the code...
@@ -94,7 +94,7 @@ function CartProviderWrapper(props) {
       return;
     }
     axios
-      .delete(`http://localhost:5005/cart/deleteProduct/${productId}?size=${size}`, {
+      .delete(`${import.meta.env.VITE_BASE_URL_API}/cart/deleteProduct/${productId}?size=${size}`, {
         headers: { Authorization: `Bearer ${storedToken}` }, data: { size: size },
       })
       .then((deletedProducts) => {

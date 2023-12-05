@@ -10,7 +10,7 @@ function Men() {
   useEffect(() => {
     const category = location.state?.category;
     axios
-      .get(`http://localhost:5005/products/${category}`)
+      .get(`${import.meta.env.VITE_BASE_URL_API}/products/${category}`)
       .then((response) => {
         setMenProduct(response.data);
       })

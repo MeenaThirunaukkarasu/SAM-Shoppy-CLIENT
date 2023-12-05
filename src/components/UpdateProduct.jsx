@@ -42,7 +42,7 @@ function UpdateProduct() {
 
   
       axios
-        .put(`http://localhost:5005/products/update/${product._id}`, updateDetails)
+        .put(`${import.meta.env.VITE_BASE_URL_API}/products/update/${product._id}`, updateDetails)
         .then((response) => {
           console.log(response.data);
           navigate(-1)

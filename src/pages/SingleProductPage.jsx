@@ -20,7 +20,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/products/${productId.id}`)
+      .get(`${import.meta.env.VITE_BASE_URL_API}/products/${productId.id}`)
       .then((response) => {
         setSingleProduct(response.data);
       })

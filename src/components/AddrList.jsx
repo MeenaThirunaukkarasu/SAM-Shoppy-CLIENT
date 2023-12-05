@@ -11,7 +11,7 @@ function AddrList({ pay, setPay, setSelectedAddr, selectedAddr, setShowAddr }) {
   const [address, setAddress] = useState([]);
   const [selectedView, setSelectedView] = useState(null);
   useEffect(() => {
-    axios.get(`http://localhost:5005/address/${user?._id}`).then((response) => {
+    axios.get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`).then((response) => {
       setAddress(response.data);
       console.log(response.data);
     });

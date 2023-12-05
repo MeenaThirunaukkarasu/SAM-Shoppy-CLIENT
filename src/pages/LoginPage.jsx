@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { CartContext } from "../context/cart.context";
 
-const API_URL = "http://localhost:5005";
+const API_URL = `${import.meta.env.VITE_BASE_URL_API}`;
 
 function LoginPage() {
   const navigate = useNavigate();

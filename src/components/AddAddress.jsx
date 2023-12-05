@@ -22,7 +22,7 @@ const addrDetails={
 }
 }
 console.log('addrDetails',addrDetails)
-axios.post(`http://localhost:5005/address/add`,{addrDetails})
+axios.post(`${import.meta.env.VITE_BASE_URL_API}/address/add`,{addrDetails})
 .then(response=>{
   console.log(response.data)
 })

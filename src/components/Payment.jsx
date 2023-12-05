@@ -8,14 +8,14 @@ function Payment({selectedAddr}) {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5005/payment/config").then(async (r) => {
+    fetch(`${import.meta.env.VITE_BASE_URL_API}/payment/config`).then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5005/payment/create-payment-intent", {
+    fetch(`${import.meta.env.VITE_BASE_URL_API}/payment/create-payment-intent`, {
       method: "POST",
       body: JSON.stringify({}),
     }).then(async (result) => {

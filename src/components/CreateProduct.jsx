@@ -50,7 +50,7 @@ const navigate=useNavigate()
     }
 
     axios
-      .post('http://localhost:5005/products/add', productData)
+      .post(`${import.meta.env.VITE_BASE_URL_API}/products/add`, productData)
       .then((response) => {
         console.log(response.data);
         navigate(-1)

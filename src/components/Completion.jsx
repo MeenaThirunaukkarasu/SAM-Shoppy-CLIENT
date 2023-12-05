@@ -42,7 +42,7 @@ function Completion() {
       console.log("overallTotal", overallTotal);
       console.log("deliveryAddress", deliveryAddress);
       axios
-        .post(`http://localhost:5005/order/create`, {
+        .post(`${import.meta.env.VITE_BASE_URL_API}/order/create`, {
           cart,
           user,
           overallTotal,

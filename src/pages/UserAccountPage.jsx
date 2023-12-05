@@ -15,7 +15,7 @@ function UserAccountPage() {
   const [pay, setPay] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5005/address/${user?._id}`).then((response) => {
+    axios.get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`).then((response) => {
       setAddresses(response.data);
       console.log("response.data", response.data);
     });

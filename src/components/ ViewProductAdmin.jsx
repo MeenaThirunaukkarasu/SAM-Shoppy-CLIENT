@@ -11,7 +11,7 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
   useEffect(() => {
     // Fetch products based on the provided category (e.g., men, women, boys, girls)
     axios
-      .get('http://localhost:5005/products')
+      .get(`${import.meta.env.VITE_BASE_URL_API}/products`)
       .then((response) => {
         const filteredData=response.data.filter(data=>{
           return data.categories===category
@@ -35,7 +35,7 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
 
   function handleDelete(id) {
     axios
-      .delete(`http://localhost:5005/products/delete/${id}`)
+      .delete(`${import.meta.env.VITE_BASE_URL_API}/products/delete/${id}`)
       .then((response) => {
         // setProducts(response.data);
         setView(category);
