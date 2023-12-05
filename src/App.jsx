@@ -20,6 +20,10 @@ import UserAccountPage from './pages/UserAccountPage'
 import Payment from "./components/Payment";
 import Completion from "./components/Completion";
 import MyOrders from './pages/MyOrders'
+import CreateProduct from './components/CreateProduct'
+import CreateAdmin from './components/CreateAdmin'
+import UpdateProduct from './components/UpdateProduct'
+
 function App() {
 
   return (
@@ -48,6 +52,10 @@ function App() {
       <Route path="/completion" element={<Completion />} />
       <Route path="/checkout" element={<checkout />} />
       <Route path="/myorders" element={ <IsPrivate><MyOrders /></IsPrivate>} />
+      <Route path="/createProduct" element={ <IsAdmin><CreateProduct /></IsAdmin>} />
+      <Route path="/createAdminCredentials" element={ <IsAdmin><CreateAdmin /></IsAdmin>} />
+      <Route path="/viewProduct" element={ <IsAdmin><ViewProductAdmin /></IsAdmin>} />
+      <Route path="/updateProduct" element={ <IsAdmin><UpdateProduct /></IsAdmin>} />
 
 
     </Routes>

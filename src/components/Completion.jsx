@@ -57,6 +57,7 @@ function Completion() {
         });
     }
   }, [redirectStatus]);
+  
 
   console.log("deliveryAddress", deliveryAddress);
   return (

@@ -1,17 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function CreateProduct({setView}) {
-    const [product, setProduct] = useState({});
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+function CreateProduct({ setView }) {
+  const [product, setProduct] = useState({});
+  const [category, setCategory] = useState();
+const navigate=useNavigate()
+  const handlecategoriesChange = (e) => {
+    const categories = e.target.value;
+    setCategory(categories);
   };
 
-
   const handleCancel = () => {
-setView(null)
+    // setView(null);
+    navigate(-1)
   };
   const handleSave = (e) => {
     e.preventDefault();
@@ -20,26 +22,43 @@ setView(null)
       desc: e.target.desc.value,
       img: e.target.img.value,
       availability: e.target.availability.value,
-      // inStock: e.target.inStock.value,
+      inStock: e.target.availability.value > 0 ? true : false,
       categories: e.target.categories.value,
-      // size: e.target.size.value,
       price: e.target.price.value,
+      size:[]
     };
-    console.log(productData)
+    console.log(productData);
+    if(productData.categories==='women' || productData.categories=== 'men'){
+      productData.size=[
+        "S", "M", "L"
+      ]
+    }
+    else if(productData.categories==='boys' || productData.categories=== 'girls'){
+      productData.size=[
+        "3 - 4",
+        "4 - 5",
+        "5 - 6",
+        "6 - 7",
+        "7 - 8",
+        "8 - 9",
+        "9 - 10",
+        "10 - 11",
+        "11 - 12",
+        "12 - 13",
+        "13 - 14",
+      ]
+    }
 
-    axios.post(`http://localhost:5005/products/add`, productData)
-      .then(response => {
-        console.log(response.data)
-        setView(null);
-
+    axios
+      .post('http://localhost:5005/products/add', productData)
+      .then((response) => {
+        console.log(response.data);
+        navigate(-1)
       })
-      .catch(err => {
-        console.error(err)
-      })
-
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
-
 
   return (
     <form onSubmit={handleSave}>
@@ -50,7 +69,7 @@ setView(null)
           id="img"
           name="img"
           // value={editedProduct.img}
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
         />
       </div>
       <div>
@@ -60,7 +79,7 @@ setView(null)
           id="title"
           name="title"
           // value={editedProduct.title}
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
         />
       </div>
       <div>
@@ -69,18 +88,24 @@ setView(null)
           id="desc"
           name="desc"
           // value={editedProduct.desc}
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
         />
       </div>
       <div>
         <label htmlFor="categories">Category:</label>
-        <input
+        {/* <input
           type="text"
           id="categories"
           name="categories"
           // value={editedProduct.categories}
-          onChange={handleInputChange}
-        />
+          onChange={handlecategoriesChange}
+        /> */}
+        <select name='categories'>
+          <option>boys</option>
+          <option>girls</option>
+          <option>men</option>
+          <option>women</option>
+        </select>
       </div>
       <div>
         <label htmlFor="availability">Availability:</label>
@@ -89,7 +114,7 @@ setView(null)
           id="availability"
           name="availability"
           // value={editedProduct.availability}
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
         />
       </div>
       <div>
@@ -99,7 +124,7 @@ setView(null)
           id="price"
           name="price"
           // value={editedProduct.price}
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
         />
       </div>
 

@@ -4,53 +4,107 @@ import CreateProduct from "../components/CreateProduct";
 import { useState, useEffect } from "react";
 import UsersList from "../components/UsersList";
 import ViewAdmin from "../components/ViewAdmin";
+import { Link } from "react-router-dom";
 
 function AdminPage() {
   const [view, setView] = useState(null);
   const [showList, setShowList] = useState(false);
-  const [viewUser,setViewUser]=useState(null)
-  const [viewAdmin,setViewAdmin]=useState(null)
-  const create = () => {
-    setView("create product");
-    setShowList(false)
-  };
+  const [viewUser, setViewUser] = useState(null);
+  const [viewAdmin, setViewAdmin] = useState(null);
+  const [category, setCategory] = useState(null);
 
-  function userView(){
-    console.log('view  user clicked')
-    setViewUser(true)
+  function userView() {
+    console.log("view  user clicked");
+    setViewUser(true);
+    setShowList(false);
+    setViewAdmin(false);
+
   }
-  function AdminView(){
-    console.log('view  user clicked')
-    setViewAdmin(true)
+  function AdminView() {
+    console.log("view  user clicked");
+    setViewAdmin(true);
+    setShowList(false);
+    setViewUser(false);
+
   }
-console.log('view',view)
+  console.log("view", view);
   return (
     <div>
-      This is Admin Page.
-      <button onClick={create}>Create Product</button>
+      <h1>This is Admin Page.</h1>
+      <button>
+        <Link to="/createProduct">Create Product</Link>
+      </button>
       <button
         onClick={() => {
           setShowList(true);
-          setView('view product')
         }}
       >
         View Product
       </button>
       <button onClick={userView}>View Users</button>
       <button onClick={AdminView}>View Admin</button>
-      <button onClick={userView}>Create Admin Credentials</button>
-      
-      {view  &&  <ViewProductAdmin setShowList={setShowList} setView={setView} view={view} category={view} /> }
-      {/* <EditProduct /> */}
-      {view === "create product" && <CreateProduct setView={setView} />}
-     {showList && <ul>
-        <li onClick={()=>{setView('men'); setShowList(false)}}>Men</li>
-        <li onClick={()=>{setView('women'); setShowList(false)}}>Women</li>
-        <li onClick={()=>{setView('boys'); setShowList(false)}}>Boys</li>
-        <li onClick={()=>{setView('girls'); setShowList(false)}}>Girls</li>
-      </ul>}
-      {viewUser && <UsersList setViewUser={setViewUser}/>}
-      {viewAdmin && <ViewAdmin setViewAdmin={setViewAdmin}/>}
+      <button ><Link to='/createAdminCredentials'>Create Admin Credentials</Link></button>
+      {view && (
+        <ViewProductAdmin
+          setShowList={setShowList}
+          setView={setView}
+          view={view}
+          category={category}
+        />
+      )}
+
+      {showList && (
+        <div>
+          <button
+            onClick={() => {
+              setShowList(false);
+            }}
+          >
+            back
+          </button>
+          <ul>
+            <li
+              onClick={() => {
+                setView("men");
+                setShowList(false);
+                setCategory("men");
+              }}
+            >
+              Men
+            </li>
+            <li
+              onClick={() => {
+                setView("women");
+                setShowList(false);
+                setCategory("women");
+              }}
+            >
+              Women
+            </li>
+            <li
+              onClick={() => {
+                setView("boys");
+                setShowList(false);
+                setCategory("boys");
+              }}
+            >
+              Boys
+            </li>
+            <li
+              onClick={() => {
+                setView("girls");
+                setShowList(false);
+                setCategory("girls");
+              }}
+            >
+              Girls
+            </li>
+          </ul>
+        </div>
+      )}
+      {viewUser && <UsersList setViewUser={setViewUser} />}
+      {viewAdmin && <ViewAdmin setViewAdmin={setViewAdmin} />}
     </div>
   );
-}export default AdminPage;
+}
+export default AdminPage;

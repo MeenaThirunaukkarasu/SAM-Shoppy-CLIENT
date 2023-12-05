@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import EditProduct from "./EditProduct";
+import { Link } from "react-router-dom";
 
 function ViewProductAdmin({ setShowList, category, setView, view }) {
   const [products, setProducts] = useState([]);
   const [editView, setEditview] = useState(null);
   const [idToUpdate, setIdToUpdate] = useState(null);
+  console.log('category',category)
   useEffect(() => {
     // Fetch products based on the provided category (e.g., men, women, boys, girls)
     axios
-      .get(`http://localhost:5005/products/${category}`)
+      .get('http://localhost:5005/products')
       .then((response) => {
-        setProducts(response.data);
+        const filteredData=response.data.filter(data=>{
+          return data.categories===category
+        })
+        console.log('filteredData',filteredData)
+
+        setProducts(filteredData);
       })
       .catch((error) => {
         console.log(error);
@@ -20,6 +27,7 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
 
   function handleUpdate(id) {
     console.log(`Update product with id: ${id}`);
+
     setEditview(true);
     setIdToUpdate(id);
     setView(null)
@@ -64,8 +72,11 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
               <div className="card-body">
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">Price: ${product.price}</p>
-                <button onClick={() => handleUpdate(product._id)}>
+                <button >
+                <Link to='/updateProduct' state={{product}}>
+
                   Update
+                </Link>
                 </button>
 
                 <button onClick={() => handleDelete(product._id)}>
