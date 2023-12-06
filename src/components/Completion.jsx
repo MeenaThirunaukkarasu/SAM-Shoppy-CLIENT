@@ -1,6 +1,6 @@
 import { PaymentContext } from "../context/payment.context";
 import { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation ,Link} from "react-router-dom";
 import { CartContext } from "../context/cart.context";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
@@ -76,7 +76,7 @@ function Completion() {
           <p>
             Your order is been placed . OrderId for reference : {orderId} 🎉
           </p>
-          <button type="submit">View Orders</button>
+          <button type="submit"><Link to='/myorders'>View Orders</Link></button>
         </div>
       ) : (
         <h1>There was a problem with your payment.</h1>

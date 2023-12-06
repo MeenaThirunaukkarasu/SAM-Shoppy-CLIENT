@@ -4,6 +4,7 @@ import CreateProduct from "../components/CreateProduct";
 import { useState, useEffect } from "react";
 import UsersList from "../components/UsersList";
 import ViewAdmin from "../components/ViewAdmin";
+import ViewOrders from  '../components/ViewOrders'
 import { Link } from "react-router-dom";
 
 function AdminPage() {
@@ -12,7 +13,6 @@ function AdminPage() {
   const [viewUser, setViewUser] = useState(null);
   const [viewAdmin, setViewAdmin] = useState(null);
   const [category, setCategory] = useState(null);
-
   function userView() {
     console.log("view  user clicked");
     setViewUser(true);
@@ -44,6 +44,7 @@ function AdminPage() {
       <button onClick={userView}>View Users</button>
       <button onClick={AdminView}>View Admin</button>
       <button ><Link to='/createAdminCredentials'>Create Admin Credentials</Link></button>
+      <button ><Link to='/vieworders'>View All Orders</Link></button>
       {view && (
         <ViewProductAdmin
           setShowList={setShowList}

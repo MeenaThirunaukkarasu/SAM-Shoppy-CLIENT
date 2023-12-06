@@ -243,9 +243,16 @@ function CartPage() {
                     </span>
                   </li>
                 </ul>
+                {totalCartItems === 0 ? (
+                <button className="btn btn-secondary btn-lg btn-block" disabled>
+                   Go to checkout
+                 </button>
+                ) : (
                 <Link to="/checkout" className="btn bg-base btn-success text-white btn-lg btn-block">
-              Go to checkout
-            </Link>
+                    Go to checkout
+                </Link>
+               )}
+               
               </div>
             </div>
           </div>

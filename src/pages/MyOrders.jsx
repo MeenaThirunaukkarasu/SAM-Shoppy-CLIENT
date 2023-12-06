@@ -9,13 +9,31 @@ function MyOrders() {
   const [myOrders,setMyOrders]=useState()
   const navigate = useNavigate();
 
+console.log('user',user)
+console.log('user?._id',user?._id)
+useEffect(() => {
+ 
+  const hasReloaded = localStorage.getItem('hasReloaded');
+
+  if (!hasReloaded) {
+    
+    window.location.reload();
+
+  
+    localStorage.setItem('hasReloaded', true);
+  }
+
+  
+ 
+}, []);
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BASE_URL_API}/order/${user?._id}`).then((response) => {
       console.log("orders", response.data);
       setMyOrders(response.data)
       axios.get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`).then((response) => {
-      setAddress(response.data);
-      console.log('addr',response.data);
+      setAddress(response.data.address);
+      console.log('addr',response.data.address);
+
     });
     })
     .catch(error=>{
@@ -59,8 +77,8 @@ console.log('address',address)
 <h3  className="text-green text-capitalize  m-2">My Order List</h3>
 
 
-  {myOrders?.map((order,index)=>{
-    const filteredAddr=address?.address?.filter(address=>{
+  {myOrders ? myOrders.map((order,index)=>{
+    const filteredAddr=address?.filter(address=>{
   return address._id===order.deliveryAddress
 })
 console.log('filteredAddr',filteredAddr)
@@ -71,9 +89,9 @@ console.log('filteredAddr',filteredAddr)
     <p><strong>Order Id: </strong> {order._id}</p>
     <p><strong>Order Placed On: </strong>{convertDateFormat(order.createdAt)}</p>
     <p><strong>Total:</strong> ${order.totalAmount}</p>
-    {/* <p>Delivered To:{filteredAddr[0]?.houseNumber} {filteredAddr[0]?.street} </p>
+    <p><strong>Delivered To:</strong> {filteredAddr[0]?.houseNumber} {filteredAddr[0]?.street} </p>
     <p>{filteredAddr[0]?.postalCode} {filteredAddr[0]?.city} </p>
-    <p>{filteredAddr[0]?.country} </p> */}
+    <p>{filteredAddr[0]?.country} </p>
     <p><strong>Order Status :</strong>{order.status}</p>
    {order.cartDetails.map((cart,index)=>{
     return(
@@ -95,7 +113,7 @@ console.log('filteredAddr',filteredAddr)
 
     </div>
     )
-  })}
+  }) : <div>No orders were placed </div>}
   </div>
   </div>
   </div>

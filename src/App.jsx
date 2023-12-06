@@ -23,6 +23,8 @@ import MyOrders from './pages/MyOrders'
 import CreateProduct from './components/CreateProduct'
 import CreateAdmin from './components/CreateAdmin'
 import UpdateProduct from './components/UpdateProduct'
+import ViewOrders from './components/ViewOrders'
+import UpdateUserInfo from './components/UpdateUserInfo'
 
 function App() {
 
@@ -56,6 +58,8 @@ function App() {
       <Route path="/createAdminCredentials" element={ <IsAdmin><CreateAdmin /></IsAdmin>} />
       <Route path="/viewProduct" element={ <IsAdmin><ViewProductAdmin /></IsAdmin>} />
       <Route path="/updateProduct" element={ <IsAdmin><UpdateProduct /></IsAdmin>} />
+      <Route path="/vieworders" element={ <IsAdmin><ViewOrders /></IsAdmin>} />
+      <Route path="/updateInfo" element={ <IsPrivate><UpdateUserInfo /></IsPrivate>} />
 
 
     </Routes>

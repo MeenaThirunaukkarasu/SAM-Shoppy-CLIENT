@@ -18,13 +18,13 @@ const addrDetails={
     city:e.target.city.value,
     postalCode:e.target.postalCode.value,
     country:e.target.country.value,
-    email:e.target.email.value,
 }
 }
 console.log('addrDetails',addrDetails)
 axios.post(`${import.meta.env.VITE_BASE_URL_API}/address/add`,{addrDetails})
 .then(response=>{
   console.log(response.data)
+  setFormView(false)
 })
 .catch(error=>{
   console.log('error',error)
