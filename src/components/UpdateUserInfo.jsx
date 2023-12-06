@@ -37,7 +37,7 @@ function UpdateUserInfo() {
 
   return (
     <div>
-      <h1>Patient Info Update Form</h1>
+      <h1>User Info Update Form</h1>
       <button
         onClick={() => {
           navigate(-1);
