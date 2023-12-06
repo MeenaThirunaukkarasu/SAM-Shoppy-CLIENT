@@ -85,8 +85,7 @@ console.log('filteredAddr',filteredAddr)
     return(
       <div key={order._id} className="bg-light-orange p-3 m-2 rounded text-start border-light-orange text-blue">
 
-    <h2><strong>Order No: </strong>{index+1}</h2>
-    <p><strong>Order Id: </strong> {order._id}</p>
+    <h2><strong>Order No: </strong>{order.orderNumber}</h2>
     <p><strong>Order Placed On: </strong>{convertDateFormat(order.createdAt)}</p>
     <p><strong>Total:</strong> ${order.totalAmount}</p>
     <p><strong>Delivered To:</strong> {filteredAddr[0]?.houseNumber} {filteredAddr[0]?.street} </p>

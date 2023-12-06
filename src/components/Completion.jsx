@@ -50,7 +50,7 @@ function Completion() {
         })
         .then((response) => {
           console.log(response.data);
-          setOrderId(response.data._id);
+          setOrderId(response.data.orderNumber);
         })
         .catch((error) => {
           console.log("error", error);
@@ -74,7 +74,7 @@ function Completion() {
         <div>
           <h1>Thank you for the payment! 🎉</h1>
           <p>
-            Your order is been placed . OrderId for reference : {orderId} 🎉
+            Your order is been placed . Order No for reference : {orderId} 🎉
           </p>
           <button type="submit"><Link to='/myorders'>View Orders</Link></button>
         </div>

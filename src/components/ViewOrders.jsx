@@ -36,6 +36,7 @@ const navigate=useNavigate()
       {orderList?.map((order, index) => {
         return (
           <div className="container" key={order._id}>
+          <h2><strong>Order No: </strong>{order.orderNumber}</h2>
             <div className="bg-light-orange p-3 m-2 rounded text-start border-light-orange text-blue">
               {/* <h2><strong>Order No: </strong>{order.orderNumber}</h2> */}
               <p>
@@ -49,15 +50,15 @@ const navigate=useNavigate()
                 <strong>Order Status :</strong>
                 {order.status}
               </p>
-              <button
+              {order.status==='processing' &&  <button
                 type="submit"
                 onClick={() => {
                   updateOrderStatus(order._id);
                 }}
                 value={order.orderNumber}
               >
-                {order.status}
-              </button>
+                Dispatch
+              </button>}
             </div>
           </div>
         );
