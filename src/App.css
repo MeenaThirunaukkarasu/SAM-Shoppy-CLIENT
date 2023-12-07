@@ -213,4 +213,25 @@ width: 35px;
     p{
       margin:0
     }
+  /* .align-self-start{
+    background-color: #264653;
+  } */
+ .btn-blue{
+  background-color: #264653;
   
+ }
+ .btn-blue:hover{
+  background-color: #4f99b6;
+  
+ }
+ .admin-button {
+  height:200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+ }
+ 
+ /* ul{
+  display: none;
+ } */

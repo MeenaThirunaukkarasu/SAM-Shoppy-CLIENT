@@ -61,79 +61,80 @@ const navigate=useNavigate()
   };
 
   return (
-    <form onSubmit={handleSave}>
-      <div>
-        <label htmlFor="img">Image URL:</label>
-        <input
-          type="text"
-          id="img"
-          name="img"
-          // value={editedProduct.img}
-          // onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          // value={editedProduct.title}
-          // onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="desc">Description:</label>
-        <textarea
-          id="desc"
-          name="desc"
-          // value={editedProduct.desc}
-          // onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="categories">Category:</label>
-        {/* <input
-          type="text"
-          id="categories"
-          name="categories"
-          // value={editedProduct.categories}
-          onChange={handlecategoriesChange}
-        /> */}
-        <select name='categories'>
-          <option>boys</option>
-          <option>girls</option>
-          <option>men</option>
-          <option>women</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="availability">Availability:</label>
-        <input
-          type="text"
-          id="availability"
-          name="availability"
-          // value={editedProduct.availability}
-          // onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="price">Price:</label>
-        <input
-          type="text"
-          id="price"
-          name="price"
-          // value={editedProduct.price}
-          // onChange={handleInputChange}
-        />
-      </div>
+    <div className="signup d-flex justify-content-center align-items-center row ">
 
-      {/* Add other editable fields as needed */}
-      <button type="submit">Create</button>
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
-    </form>
+    <form className="bg-base p-3 col-10 col-sm-6 col-md-6 col-lg-5 col-xl-5 col-xxl-4 rounded" onSubmit={handleSave}>
+  <h2 className="mb-5">Create Your Product</h2>
+  <div className="mb-3">
+    <label htmlFor="img" className="d-flex text-left mb-1">Image</label>
+    <input
+      type="text"
+      className="form-control"
+      id="img"
+      name="img"
+      placeholder="Image"
+      required
+    />
+  </div>
+  <div className="mb-3">
+    <label htmlFor="title" className="d-flex text-left mb-1">Title</label>
+    <input
+      type="text"
+      className="form-control"
+      id="title"
+      name="title"
+      placeholder="Title"
+      required
+    />
+  </div>
+  <div className="mb-3">
+    <label htmlFor="desc" className="d-flex text-left mb-1">Description</label>
+    <textarea
+      className="form-control"
+      id="desc"
+      name="desc"
+      placeholder="Description"
+      required
+    />
+  </div>
+  <div className="mb-3">
+    <label htmlFor="categories" className="d-flex text-left mb-1">Category</label>
+    <select className="form-select" name="categories">
+      <option value="boys">Boys</option>
+      <option value="girls">Girls</option>
+      <option value="men">Men</option>
+      <option value="women">Women</option>
+    </select>
+  </div>
+  <div className="mb-3">
+    <label htmlFor="availability" className="d-flex text-left mb-1">Availability</label>
+    <input
+      type="text"
+      className="form-control"
+      id="availability"
+      name="availability"
+      placeholder="Availability"
+      required
+    />
+  </div>
+  <div className="mb-3">
+    <label htmlFor="price" className="d-flex text-left mb-1">Price</label>
+    <input
+      type="text"
+      className="form-control"
+      id="price"
+      name="price"
+      placeholder="Price"
+      required
+    />
+  </div>
+  <div className="mb-3">
+    <button type="submit" className="btn btn-blue">Create</button>
+    <button type="button" className="btn btn-blue" onClick={handleCancel}>Cancel</button>
+  </div>
+</form>
+    </div>
+
   );
 }
 export default CreateProduct;

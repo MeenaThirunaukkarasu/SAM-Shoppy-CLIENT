@@ -76,9 +76,6 @@ function SignUpPage() {
           </button>
           </div>
       </div>
-
-
-
         <button type="submit" className="btn btn-blue mt-4">Sign Up</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
