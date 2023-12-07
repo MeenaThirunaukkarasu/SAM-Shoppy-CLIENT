@@ -32,14 +32,17 @@ https://github.com/MeenaThirunaukkarasu/SAM-Shoppy-CLIENT
 # Navigate to the project directory:
 
 cd SAM-Shoppy-SERVER
+
 cd SAM-Shoppy-CLIENT
 
 # Install dependencies for the client and server:
 
 cd SAM-Shoppy-SERVER
+
 npm install
 
 cd SAM-Shoppy-CLIENT
+
 npm install
 
 1. Set up MongoDB Atlas:
