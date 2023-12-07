@@ -20,6 +20,7 @@ Registered users have access to a personalized dashboard to manage their profile
 1. Clone the repository:
 
 https://github.com/MeenaThirunaukkarasu/SAM-Shoppy-SERVER
+
 https://github.com/MeenaThirunaukkarasu/SAM-Shoppy-CLIENT
 
 # Navigate to the project directory:
