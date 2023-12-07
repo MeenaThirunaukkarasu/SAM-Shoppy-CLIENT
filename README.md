@@ -7,13 +7,19 @@ SAM-Shoppy is a full-stack e-commerce shopping website developed using React, Mo
 
 ## Features
 
-. Responsive design for seamless experience across multiple devices.
-. Secure JWT authentication for user protection.
-. Versatile payment options including iDEAL and credit card through Stripe integration and Complete the purchase with a    secure checkout process.
-.Convenient order tracking to keep customers informed on the status of their purchases.
-. Users can create accounts, log in, and securely authenticate their identity.
-. Display a wide range of products with details such as images, descriptions, and prices.
-. Registered users have access to a personalized dashboard to manage their profile and view order history.
+Responsive design for seamless experience across multiple devices.
+
+Secure JWT authentication for user protection.
+
+Versatile payment options including iDEAL and credit card through Stripe integration and Complete the purchase with a secure checkout process.
+
+Convenient order tracking to keep customers informed on the status of their purchases.
+
+Users can create accounts, log in, and securely authenticate their identity.
+
+Display a wide range of products with details such as images, descriptions, and prices.
+
+Registered users have access to a personalized dashboard to manage their profile and view order history.
 
 ## Installation
 
