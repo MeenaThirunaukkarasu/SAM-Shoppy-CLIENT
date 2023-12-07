@@ -21,7 +21,7 @@ function singleProduct(id) {
 
 return(
     <div >
-    This is  Home Page
+   <h2>Home Page</h2>
     <section className="container text-center Men">
       <div className="row row-cols-4">
     {products?.map(product=>{

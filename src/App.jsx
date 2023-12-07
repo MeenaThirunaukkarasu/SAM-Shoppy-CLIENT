@@ -24,7 +24,8 @@ import CreateProduct from './components/CreateProduct'
 import CreateAdmin from './components/CreateAdmin'
 import UpdateProduct from './components/UpdateProduct'
 import ViewOrders from './components/ViewOrders'
-import UpdateUserInfo from './components/UpdateUserInfo'
+import UpdateUserInfo from './components/UpdateUserInfo';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -63,9 +64,10 @@ function App() {
 
 
     </Routes>
+
     </div>
    
-    
+    <Footer />
 
     </div>
   )
