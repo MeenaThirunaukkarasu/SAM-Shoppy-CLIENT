@@ -3,7 +3,7 @@
 
 # SAM-Shoppy E-commerce Website 
 
-SAM-Shoppy is a full-stack e-commerce shopping website developed using React, MongoDB, Node.js, Express, Mongoose, HTML, CSS, JavaScript, and Bootstrap. This platform provides a seamless shopping experience for users, allowing them to browse products, add items to their cart, and complete the purchase.
+SAM-Shoppy is a full-stack e-commerce shopping website developed using React, MongoDB, Node.js, Express, Mongoose, HTML, CSS and Bootstrap. This platform provides a user friendly shopping experience, allowing them to browse products, add items to their cart, and complete the purchase.
 
 ## Features
 
@@ -15,9 +15,7 @@ SAM-Shoppy is a full-stack e-commerce shopping website developed using React, Mo
 
 --> Convenient order tracking to keep customers informed on the status of their purchases.
 
---> Users can create accounts, log in, and securely authenticate their identity.
-
---> Display a wide range of products with details such as images, descriptions, and prices.
+--> Display a wide range of products with details such as images, descriptions, size, availability and prices.
 
 --> Registered users have access to a personalized dashboard to manage their profile and view order history.
 

@@ -41,10 +41,10 @@ function Completion() {
       console.log("user", user);
       console.log("overallTotal", overallTotal);
       console.log("deliveryAddress", deliveryAddress);
-      if(cart.cartDetails.length !==0){
+      if(cart.cartDetails && cart.cartDetails.length !==0){
         axios
         .post(`${import.meta.env.VITE_BASE_URL_API}/order/create`, {
-          cart,
+                   cart,
           user,
           overallTotal,
           deliveryAddress,
@@ -62,7 +62,6 @@ function Completion() {
   }, [redirectStatus]);
   
 
-  console.log("deliveryAddress", deliveryAddress);
   return (
     <div>
       {/* <ul className="bought-items">
