@@ -6,7 +6,7 @@ import { PaymentContext } from "../context/payment.context";
 
 export default function CheckoutForm({selectedAddr}) {
     const  {selectedAddress}=useContext(PaymentContext)
-    console.log('selectedAddress',selectedAddress)
+    ('selectedAddress',selectedAddress)
 
   const stripe = useStripe();
   const elements = useElements();

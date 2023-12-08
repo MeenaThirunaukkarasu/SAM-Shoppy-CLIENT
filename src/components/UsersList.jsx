@@ -6,7 +6,7 @@ function UsersList({ setViewUser }) {
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BASE_URL_API}/auth`).then((response) => {
-      console.log(response.data);
+      (response.data);
       const user=response.data.filter(user=>{
         return user.role!=='admin'
       })

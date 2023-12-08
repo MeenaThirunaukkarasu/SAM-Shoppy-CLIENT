@@ -15,7 +15,7 @@ function Men() {
         setMenProduct(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }, [location.state?.category]);
   

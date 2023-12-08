@@ -16,11 +16,11 @@ function CreateAdmin(){
           password: e.target.password.value,
           role:e.target.role.value
         };
-        console.log(data);
+        (data);
         axios
           .post(`${API_URL}/auth/signup`, data)
           .then((response) => {
-            console.log("Admin created successfully", response.data);
+            ("Admin created successfully", response.data);
             navigate(-1);
           })
           .catch((error) => {

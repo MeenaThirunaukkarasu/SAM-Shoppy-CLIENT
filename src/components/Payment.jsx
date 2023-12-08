@@ -20,7 +20,7 @@ function Payment({selectedAddr}) {
       body: JSON.stringify({}),
     }).then(async (result) => {
       const { clientSecret } = await result.json();
-      console.log('clientSecret',clientSecret)
+      ('clientSecret',clientSecret)
       setClientSecret(clientSecret);
     });
   }, []);

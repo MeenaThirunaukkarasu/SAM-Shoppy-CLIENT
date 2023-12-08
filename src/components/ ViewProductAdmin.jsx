@@ -7,7 +7,7 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
   const [products, setProducts] = useState([]);
   const [editView, setEditview] = useState(null);
   const [idToUpdate, setIdToUpdate] = useState(null);
-  console.log('category',category)
+  ('category',category)
   useEffect(() => {
     // Fetch products based on the provided category (e.g., men, women, boys, girls)
     axios
@@ -16,17 +16,17 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
         const filteredData=response.data.filter(data=>{
           return data.categories===category
         })
-        console.log('filteredData',filteredData)
+        ('filteredData',filteredData)
 
         setProducts(filteredData);
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }, [category]);
 
   function handleUpdate(id) {
-    console.log(`Update product with id: ${id}`);
+    (`Update product with id: ${id}`);
 
     setEditview(true);
     setIdToUpdate(id);
@@ -40,10 +40,10 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
         // setProducts(response.data);
         setView(category);
         window.location.reload();
-        console.log("product deleted");
+        ("product deleted");
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }
 

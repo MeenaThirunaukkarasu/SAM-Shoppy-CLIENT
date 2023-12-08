@@ -11,7 +11,7 @@ function OrderPage() {
   const [expectedDeliveryDate, setExpectedDeliveryDate] = useState(new Date());
   // useEffect(() => {
   //   let totalItems = 0;
-  // console.log('cart',cart)
+  // ('cart',cart)
   //   // Check if cart is not null or undefined
   //   if (cart) {
   //     cart.cartDetails?.forEach((cartDetail) => {
@@ -43,9 +43,9 @@ function OrderPage() {
     addProduct(id,size);
   }
   function removeItem(id,size) {
-    console.log('size',size)
+    ('size',size)
     deleteProduct(id,size);
-    console.log("Updated Cart:", cart);
+    ("Updated Cart:", cart);
   }
   // Calculate the total cost for each item
   const calculateItemTotal = (item) => {
