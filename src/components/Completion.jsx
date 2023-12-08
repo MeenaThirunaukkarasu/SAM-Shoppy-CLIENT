@@ -41,7 +41,8 @@ function Completion() {
       console.log("user", user);
       console.log("overallTotal", overallTotal);
       console.log("deliveryAddress", deliveryAddress);
-      axios
+      if(cart.cartDetails.length !==0){
+        axios
         .post(`${import.meta.env.VITE_BASE_URL_API}/order/create`, {
           cart,
           user,
@@ -49,12 +50,14 @@ function Completion() {
           deliveryAddress,
         })
         .then((response) => {
+          localStorage.removeItem("cart");
           console.log(response.data);
           setOrderId(response.data.orderNumber);
         })
         .catch((error) => {
           console.log("error", error);
         });
+      }      
     }
   }, [redirectStatus]);
   

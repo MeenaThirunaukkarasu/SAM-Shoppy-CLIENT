@@ -14,18 +14,15 @@ function AdminPage() {
   const [viewAdmin, setViewAdmin] = useState(null);
   const [category, setCategory] = useState(null);
   function userView() {
-    console.log("view  user clicked");
     setViewUser(true);
     setShowList(false);
     setViewAdmin(false);
   }
   function AdminView() {
-    console.log("view  user clicked");
     setViewAdmin(true);
     setShowList(false);
     setViewUser(false);
   }
-  console.log("view", view);
   return (
     <div className="container text-center ">
       <h1>Admin Page</h1>

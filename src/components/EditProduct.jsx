@@ -4,31 +4,6 @@ import axios from "axios";
 function EditProduct({ idToUpdate, category, setView,setEditview }) {
   const [productToUpdate, setProductToUpdate] = useState(null);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:5005/products/${idToUpdate}`)
-  //     .then((response) => {
-  //       setProductToUpdate(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error", error);
-  //     });
-  // }, []);
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   // setEditedProduct({ ...editedProduct, [name]: value });
-  // };
-
-  // const handleSave = () => {
-  //   // onSave(productId, editedProduct);
-  // };
-
-  // const handleCancel = () => {
-  //   // onCancel();
-  //   setView(category)
-  // };
-
   return (
     <div>
       <h2>Edit Product</h2>
@@ -111,3 +86,5 @@ function EditProduct({ idToUpdate, category, setView,setEditview }) {
   );
 }
 export default EditProduct;
+
+

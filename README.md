@@ -62,7 +62,7 @@ npm start
 # Tech Stack
 Client: React, Redux, Bootstrap
 
-Server: Node, Express, MongoDB
+Server: Node, Express, MongoDB, Mailjet
 
 Payment: Stripe
 

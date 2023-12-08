@@ -52,77 +52,87 @@ function UpdateProduct() {
         });
   }
   return (
-    <div>
-      <h1>Update </h1>
-      <form onSubmit={updateProduct}>
-        <div>
-          <label htmlFor="img">Image URL:</label>
-          <input
-            type="text"
-            id="img"
-            name="img"
-            defaultValue={product.img}
-          />
-        </div>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            defaultValue={product.title}
-          />
-        </div>
-        <div>
-          <label htmlFor="desc">Description:</label>
-          <textarea
-            id="desc"
-            name="desc"
-            defaultValue={product.desc}
-          />
-        </div>
-        <div>
-          <label htmlFor="categories">Category:</label>
+    <div className="update-product d-flex justify-content-center align-items-center row">
+  <form className="bg-base p-3 col-10 col-sm-6 col-md-6 col-lg-5 col-xl-5 col-xxl-4 rounded" onSubmit={updateProduct}>
+    <h1>Update Product</h1>
 
-          <select name="categories"  defaultValue={product.categories}>
-            <option defaultValue="" disabled>
-              {product.categories}
-            </option>
-            <option defaultValue="boys">boys</option>
-            <option defaultValue="girls">girls</option>
-            <option defaultValue="men">men</option>
-            <option defaultValue="women">women</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="availability">Availability:</label>
-          <input
-            type="text"
-            id="availability"
-            name="availability"
-            defaultValue={product.availability}
-          />
-        </div>
-        <div>
-          <label htmlFor="price">Price:</label>
-          <input
-            type="text"
-            id="price"
-            name="price"
-            defaultValue={product.price}
-          />
-        </div>
-
-        <button type="submit">Update</button>
-        <button
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Cancel
-        </button>
-      </form>
+    <div className="mb-3">
+      <label htmlFor="img" className="form-label">Image URL:</label>
+      <input
+        type="text"
+        id="img"
+        name="img"
+        className="form-control"
+        defaultValue={product.img}
+      />
     </div>
+
+    <div className="mb-3">
+      <label htmlFor="title" className="form-label">Title:</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        className="form-control"
+        defaultValue={product.title}
+      />
+    </div>
+
+    <div className="mb-3">
+      <label htmlFor="desc" className="form-label">Description:</label>
+      <textarea
+        id="desc"
+        name="desc"
+        className="form-control"
+        defaultValue={product.desc}
+      />
+    </div>
+
+    <div className="mb-3">
+      <label htmlFor="categories" className="form-label">Category:</label>
+      <select name="categories" className="form-select" defaultValue={product.categories}>
+        <option value="" disabled>Select Category</option>
+        <option value="boys">Boys</option>
+        <option value="girls">Girls</option>
+        <option value="men">Men</option>
+        <option value="women">Women</option>
+      </select>
+    </div>
+
+    <div className="mb-3">
+      <label htmlFor="availability" className="form-label">Availability:</label>
+      <input
+        type="text"
+        id="availability"
+        name="availability"
+        className="form-control"
+        defaultValue={product.availability}
+      />
+    </div>
+
+    <div className="mb-3">
+      <label htmlFor="price" className="form-label">Price:</label>
+      <input
+        type="text"
+        id="price"
+        name="price"
+        className="form-control"
+        defaultValue={product.price}
+      />
+    </div>
+
+    <button type="submit" className="btn btn-primary">Update</button>
+    <button
+      onClick={() => {
+        navigate(-1);
+      }}
+      className="btn btn-secondary"
+    >
+      Cancel
+    </button>
+  </form>
+</div>
+
   );
 }
 

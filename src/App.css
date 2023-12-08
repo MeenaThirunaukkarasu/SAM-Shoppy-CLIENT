@@ -232,9 +232,10 @@ width: 35px;
   margin:10px;
  }
  
- /* ul{
-  display: none;
- } */
+ ul{
+  style: none;
+ }
+ 
  footer {
   background-color: #264653;
   color: #fff;
