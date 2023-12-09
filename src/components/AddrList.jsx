@@ -15,26 +15,26 @@ function AddrList({ pay, setPay, setSelectedAddr, selectedAddr, setShowAddr }) {
       .get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`)
       .then((response) => {
         setAddress(response.data);
-        console.log(response.data);
+        (response.data);
       });
   }, []);
-  console.log("user", user);
+  ("user", user);
   function getSelectedAddr(address) {
-    console.log("Selected Address:", address);
+    ("Selected Address:", address);
     updateAddressStatus(address);
     setSelectedAddr(address);
     setSelectedView(true);
   }
   function deleteAddr(id) {
-    console.log('addrId',id)
-    console.log('userId',user._id)
+    ('addrId',id)
+    ('userId',user._id)
     axios
       .delete(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}/${id}`)
       .then((response) => {
         setAddress(response.data);
       })
       .catch((error) => {
-        console.log("error", error);
+        ("error", error);
       });
   }
   return (

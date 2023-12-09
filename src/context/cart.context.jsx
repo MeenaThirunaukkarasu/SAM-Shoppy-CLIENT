@@ -42,7 +42,7 @@ function CartProviderWrapper(props) {
       user:user._id,
       size:size
     }
-    console.log(cartDetails)
+    (cartDetails)
     axios
       .post(
         `${import.meta.env.VITE_BASE_URL_API}/cart/add`,
@@ -50,16 +50,16 @@ function CartProviderWrapper(props) {
         { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((addedProducts) => {
-        console.log(addedProducts);
+        (addedProducts);
         window.location.reload();
       })
       .catch((error) => {
-        console.log("error", error);
+        ("error", error);
       });
   };
   // delete a function to delete a product to the cart
   const deleteOne = (productId,size) => {
-    console.log(productId);
+    (productId);
     setCart((prevCart) =>
       prevCart.filter((item) => item.product._id !== productId)
     );
@@ -74,16 +74,16 @@ function CartProviderWrapper(props) {
     })
     // rest of the code...
           .then((deletedProducts) => {
-        console.log(deletedProducts);
+        (deletedProducts);
         window.location.reload();
       })
       .catch((error) => {
-        console.log("error", error);
+        ("error", error);
       });
   };
   const deleteProduct = (productId,size) => {
-    console.log(size)
-    console.log(productId);
+    (size)
+    (productId);
     setCart((prevCart) =>
       prevCart.filter((item) => item.product._id !== productId)
     );
@@ -98,11 +98,11 @@ function CartProviderWrapper(props) {
         headers: { Authorization: `Bearer ${storedToken}` }, data: { size: size },
       })
       .then((deletedProducts) => {
-        console.log(deletedProducts);
+        (deletedProducts);
         window.location.reload();
       })
       .catch((error) => {
-        console.log("error", error);
+        ("error", error);
       });
   };
   return (

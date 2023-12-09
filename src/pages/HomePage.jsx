@@ -11,7 +11,7 @@ axios.get(`${import.meta.env.VITE_BASE_URL_API}/products`)
 setProducts(response.data)
 })
 .catch(error=>{
-    console.log('error',error)
+    ('error',error)
 })
 },[])
 

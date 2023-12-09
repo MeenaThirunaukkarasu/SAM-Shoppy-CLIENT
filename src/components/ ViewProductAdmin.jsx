@@ -16,17 +16,17 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
         const filteredData=response.data.filter(data=>{
           return data.categories===category
         })
-        console.log('filteredData',filteredData)
+          console.log('filteredData',filteredData);
 
         setProducts(filteredData);
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }, [category]);
 
   function handleUpdate(id) {
-    console.log(`Update product with id: ${id}`);
+    (`Update product with id: ${id}`);
 
     setEditview(true);
     setIdToUpdate(id);
@@ -43,7 +43,7 @@ function ViewProductAdmin({ setShowList, category, setView, view }) {
         console.log("product deleted");
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }
 

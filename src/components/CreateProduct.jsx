@@ -27,7 +27,7 @@ const navigate=useNavigate()
       price: e.target.price.value,
       size:[]
     };
-    console.log(productData);
+    (productData);
     if(productData.categories==='women' || productData.categories=== 'men'){
       productData.size=[
         "S", "M", "L"
@@ -52,7 +52,7 @@ const navigate=useNavigate()
     axios
       .post(`${import.meta.env.VITE_BASE_URL_API}/products/add`, productData)
       .then((response) => {
-        console.log(response.data);
+        (response.data);
         navigate(-1)
       })
       .catch((err) => {

@@ -7,10 +7,10 @@ const PaymentContext =React.createContext();
   const [selectedAddress, setSelectedAddress] = useState();
 
   const updateAddressStatus = (addr) => {
-    // console.log(addr)
+    // (addr)
     const addrString = JSON.stringify(addr)
     const storedAddr = localStorage.setItem("storedAddr",addrString);
-console.log('addr',addr)
+('addr',addr)
     setSelectedAddress(addr);
   };
   const refreshAddr = () => {
@@ -19,7 +19,7 @@ console.log('addr',addr)
     return storedAddr;
   };
 
-// console.log(selectedAddress)
+// (selectedAddress)
   return (
     <PaymentContext.Provider value={{ selectedAddress, updateAddressStatus ,refreshAddr}}>
       {props.children}

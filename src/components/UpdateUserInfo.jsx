@@ -20,16 +20,16 @@ function UpdateUserInfo() {
       newPassword: e.target.newPassword.value,
       role: user.role,
     };
-    console.log(user._id);
+    (user._id);
     axios
       .put(`${API_URL}/auth/update/${user._id}`, updatedUserInfo)
       .then((response) => {
-        console.log("update  done successfully", response.data);
+        ("update  done successfully", response.data);
         logOutUser()
         navigate('/login')
       })
       .catch((error) => {
-        console.log('error',error.response.data)
+        ('error',error.response.data)
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
