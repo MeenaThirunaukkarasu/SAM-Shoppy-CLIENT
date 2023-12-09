@@ -3,7 +3,7 @@ import axios from 'axios'
 function UpdateProduct() {
   const location = useLocation();
   const product = location.state?.product;
-  ("ProductId", product);
+ 
   const navigate = useNavigate();
 
   function updateProduct(e) {
@@ -38,13 +38,13 @@ function UpdateProduct() {
           "13 - 14",
         ]
       }
-      (updateDetails);
+     
 
   
       axios
         .put(`${import.meta.env.VITE_BASE_URL_API}/products/update/${product._id}`, updateDetails)
         .then((response) => {
-          (response.data);
+       
           navigate(-1)
         })
         .catch((err) => {

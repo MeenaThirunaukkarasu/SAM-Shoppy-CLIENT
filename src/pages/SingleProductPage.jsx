@@ -13,7 +13,7 @@ function SingleProductPage() {
   const { user } =  useContext(AuthContext)
   const defaultSize= singleProduct.size && singleProduct.size.length > 0 ? singleProduct.size[0] : '';
   const  [size,setSize]=useState()
-  ('user',user)
+  
 useEffect(() => {
   setSize(defaultSize);
 }, [defaultSize]);
@@ -25,7 +25,7 @@ useEffect(() => {
         setSingleProduct(response.data);
       })
       .catch((error) => {
-        (error);
+       
       });
   }, []);
   return (

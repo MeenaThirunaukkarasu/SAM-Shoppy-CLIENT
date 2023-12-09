@@ -7,7 +7,7 @@ function ViewOrders({ setViewOrders }) {
 const navigate=useNavigate()
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BASE_URL_API}/order`).then((response) => {
-      (response.data);
+     
       setOrderList(response.data);
     });
   }, []);
@@ -23,8 +23,7 @@ const navigate=useNavigate()
   }
 
   const updateOrderStatus = (id) => {
-    axios.patch(`http://localhost:5005/order/update/${id}`).then((response) => {
-      (response.data);
+    axios.patch(`${import.meta.env.VITE_BASE_URL_API}/order/update/${id}`).then((response) => {
       window.location.reload();
     });
   };

@@ -17,7 +17,7 @@ function UserAccountPage() {
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`).then((response) => {
       setAddresses(response.data);
-      ("response.data", response.data);
+      
     });
   }, []);
 

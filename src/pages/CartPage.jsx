@@ -43,9 +43,9 @@ function CartPage() {
     addProduct(id,size);
   }
   function removeItem(id,size) {
-    ('size',size)
+    
     deleteProduct(id,size);
-    ("Updated Cart:", cart);
+   
   }
   // Calculate the total cost for each item
   const calculateItemTotal = (item) => {

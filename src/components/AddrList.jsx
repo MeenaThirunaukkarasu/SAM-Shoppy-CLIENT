@@ -15,26 +15,22 @@ function AddrList({ pay, setPay, setSelectedAddr, selectedAddr, setShowAddr }) {
       .get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`)
       .then((response) => {
         setAddress(response.data);
-        (response.data);
       });
   }, []);
-  ("user", user);
+ 
   function getSelectedAddr(address) {
-    ("Selected Address:", address);
     updateAddressStatus(address);
     setSelectedAddr(address);
     setSelectedView(true);
   }
   function deleteAddr(id) {
-    ('addrId',id)
-    ('userId',user._id)
     axios
       .delete(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}/${id}`)
       .then((response) => {
         setAddress(response.data);
       })
       .catch((error) => {
-        ("error", error);
+       
       });
   }
   return (

@@ -42,7 +42,7 @@ function CartProviderWrapper(props) {
       user:user._id,
       size:size
     }
-    (cartDetails)
+    
     axios
       .post(
         `${import.meta.env.VITE_BASE_URL_API}/cart/add`,
@@ -50,16 +50,16 @@ function CartProviderWrapper(props) {
         { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((addedProducts) => {
-        (addedProducts);
+        
         window.location.reload();
       })
       .catch((error) => {
-        ("error", error);
+       
       });
   };
   // delete a function to delete a product to the cart
   const deleteOne = (productId,size) => {
-    (productId);
+    
     setCart((prevCart) =>
       prevCart.filter((item) => item.product._id !== productId)
     );
@@ -74,16 +74,15 @@ function CartProviderWrapper(props) {
     })
     // rest of the code...
           .then((deletedProducts) => {
-        (deletedProducts);
+        
         window.location.reload();
       })
       .catch((error) => {
-        ("error", error);
+      
       });
   };
   const deleteProduct = (productId,size) => {
-    (size)
-    (productId);
+   
     setCart((prevCart) =>
       prevCart.filter((item) => item.product._id !== productId)
     );
@@ -98,11 +97,11 @@ function CartProviderWrapper(props) {
         headers: { Authorization: `Bearer ${storedToken}` }, data: { size: size },
       })
       .then((deletedProducts) => {
-        (deletedProducts);
+      
         window.location.reload();
       })
       .catch((error) => {
-        ("error", error);
+       
       });
   };
   return (

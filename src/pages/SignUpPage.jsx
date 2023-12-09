@@ -15,12 +15,11 @@ function SignUpPage() {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    (data);
+   
     axios
       .post(`${API_URL}/auth/signup`, data)
       .then((response) => {
-        ("signup  done successfully");
-        ("signup  done successfully", response.data);
+        
         navigate("/login");
       })
       .catch((error) => {

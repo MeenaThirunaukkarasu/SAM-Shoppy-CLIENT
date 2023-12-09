@@ -9,8 +9,7 @@ function MyOrders() {
   const [myOrders,setMyOrders]=useState()
   const navigate = useNavigate();
 
-('user',user)
-('user?._id',user?._id)
+
 useEffect(() => {
  
   const hasReloaded = localStorage.getItem('hasReloaded');
@@ -28,16 +27,16 @@ useEffect(() => {
 }, []);
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BASE_URL_API}/order/${user?._id}`).then((response) => {
-      ("orders", response.data);
+     
       setMyOrders(response.data)
       axios.get(`${import.meta.env.VITE_BASE_URL_API}/address/${user?._id}`).then((response) => {
       setAddress(response.data.address);
-      ('addr',response.data.address);
+     
 
     });
     })
     .catch(error=>{
-      (error)
+     
     })
   }, []);
 
@@ -69,7 +68,7 @@ function add30DaysAndFormat(date) {
 
   return formattedNewDate;
 }
-('address',address)
+
   return     <div className="container  position-relative">
     <div className=" d-flex justify-content-center align-items-center  row col-11 mx-auto ">
 
@@ -81,7 +80,7 @@ function add30DaysAndFormat(date) {
     const filteredAddr=address?.filter(address=>{
   return address._id===order.deliveryAddress
 })
-('filteredAddr',filteredAddr)
+
     return(
       <div key={order._id} className="bg-light-orange p-3 m-2 rounded text-start border-light-orange text-blue">
 

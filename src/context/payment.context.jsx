@@ -10,7 +10,7 @@ const PaymentContext =React.createContext();
     // (addr)
     const addrString = JSON.stringify(addr)
     const storedAddr = localStorage.setItem("storedAddr",addrString);
-('addr',addr)
+
     setSelectedAddress(addr);
   };
   const refreshAddr = () => {

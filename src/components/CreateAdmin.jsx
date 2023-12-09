@@ -16,7 +16,7 @@ function CreateAdmin(){
           password: e.target.password.value,
           role:e.target.role.value
         };
-        (data);
+     
         axios
           .post(`${API_URL}/auth/signup`, data)
           .then((response) => {

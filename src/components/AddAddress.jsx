@@ -7,7 +7,6 @@ function AddAddress({setFormView}){
 
 function addAddr(e){
 e.preventDefault()
-('function called')
 
 const addrDetails={
   user:user._id,
@@ -20,14 +19,12 @@ const addrDetails={
     country:e.target.country.value,
 }
 }
-('addrDetails',addrDetails)
+
 axios.post(`${import.meta.env.VITE_BASE_URL_API}/address/add`,{addrDetails})
 .then(response=>{
-  (response.data)
   setFormView(false)
 })
 .catch(error=>{
-  ('error',error)
 })
 }
 function goBack(){

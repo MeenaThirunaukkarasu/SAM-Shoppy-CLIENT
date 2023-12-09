@@ -7,7 +7,7 @@ import axios from "axios";
 
 function Completion() {
   const { selectedAddress, refreshAddr } = useContext(PaymentContext);
-  ("selectedAddress", selectedAddress);
+
   const [redirectStatus, setRedirectStatus] = useState(null);
   const [deliveryAddress, setDeliveryAddress] = useState();
   const [overallTotal, setOverallTotal] = useState(null);
@@ -36,11 +36,7 @@ function Completion() {
       const storedUserObject = localStorage.getItem("user");
       const user = JSON.parse(storedUserObject);
 
-      ("creating order");
-      ("cart", cart);
-      ("user", user);
-      ("overallTotal", overallTotal);
-      ("deliveryAddress", deliveryAddress);
+      
       if(cart.cartDetails && cart.cartDetails.length !==0){
         axios
         .post(`${import.meta.env.VITE_BASE_URL_API}/order/create`, {
@@ -51,11 +47,11 @@ function Completion() {
         })
         .then((response) => {
           localStorage.removeItem("cart");
-          (response.data);
+         
           setOrderId(response.data.orderNumber);
         })
         .catch((error) => {
-          ("error", error);
+          
         });
       }      
     }
